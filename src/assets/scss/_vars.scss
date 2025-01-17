@@ -1,0 +1,18 @@
+//Färger
+$dark: #082329;
+$mediumdark: #0b4651;
+$medium: #429698;
+$mediumlight: #bdd1bd;
+$light: #dfebec;
+
+//Fonter
+$headings: 'Rethink Sans', Arial, Helvetica, sans-serif;
+$bread: 'Kantumruy Pro', Arial, Helvetica, sans-serif;
+$logs: 'Azeret Mono', Courier, monospace;
+
+/* Transition-mixin, för det är inte ett Saga-projekt utan det */
+@mixin transition {
+    transition: 0.6s ease;
+    -webkit-transition: 0.6s ease;
+    -moz-transition: 0.6s ease;
+}
