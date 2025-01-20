@@ -1,9 +1,96 @@
 <template>
-    <h1>RegisterView</h1>
-    <p>Har du redan ett konto? <RouterLink to="/login">Logga in</RouterLink> istället.</p>
+    <h1 class="text-center pb-4">Registrera dig</h1>
+        <form @submit.prevent="onSubmit" class="authform">
+        <span class="error text-red-400">{{ errorMessage }}</span>
+        <!-- Användarnamn -->
+        <div class="form-group">
+            <label for="username">Användarnamn:</label>
+            <input type="text" name="username" id="username" v-model="username">
+        </div>
+
+        <!-- Lösenord -->
+        <div class="form-group">
+            <label for="password">Lösenord:</label>
+            <input type="password" name="password" id="password" v-model="password">
+        </div>
+
+        <input type="submit" :value="loginInProgress ? 'Loggar in...' : 'Logga in'">
+    </form>
+    <p class="text-xs pt-4">Har du redan ett konto? <RouterLink to="/login">Logga in</RouterLink> istället.</p>
 </template>
 
 <script setup>
-import { RouterLink } from 'vue-router';
+import { RouterLink, useRouter } from 'vue-router';
+import { ref } from 'vue';
+import { cookieCreator } from '../utils/auth';
+
+//Router
+const router = useRouter();
+
+//lagra inloggningsuppgifter
+const username = ref(""); 
+const password = ref(""); 
+
+const loginInProgress = ref(false); 
+const errorMessage = ref(""); // Lagra felmeddelanden
+
+//Validera input
+const validateInput = () => {
+    if (username.value === "" || password.value === "") {
+        document.querySelector('.error').textContent = "Fyll i alla fält";
+        return false;
+    }
+    return true;
+}
+
+//Kontrollera 
+async function onSubmit() {
+    loginInProgress.value = true; 
+    //Validera
+    if(!validateInput()) {
+        loginInProgress.value = false; 
+        return; 
+    }
+    console.log('Form submitted');
+
+    await signup(); 
+}
+
+//Registrera
+async function signup() {
+    try {
+        const response = await fetch('https://summitapi.up.railway.app/signup', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                username: username.value,
+                password: password.value,
+            }),
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+            //Logga in användare direkt: 
+
+            //Skapa cookie
+            cookieCreator(data);
+            // Lagra användarnamn
+            sessionStorage.setItem("username", data.newUser.username);  
+            //Omdirigera till dashboard
+            router.push('/');
+        } else {
+            // Visa felmeddelande
+            console.log(data);
+            errorMessage.value = data.message;
+        }
+    } catch (error) {
+        console.error('Något gick fel vid registrering:', error);
+    } finally {
+        loginInProgress.value = false;
+    }
+}
 </script>
 

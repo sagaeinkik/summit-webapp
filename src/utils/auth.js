@@ -1,5 +1,9 @@
 'use strict';
 
+export async function cookieCreator(data) {
+    document.cookie = `jwt=${data.token}; max-age=10800; path=/;`; //3h, samma som JWT-token
+}
+
 export function getCookie(name) {
     //Lägg alla kakor i array, kolla igenom om en kaka matchar jwt=
     const value = `; ${document.cookie}`;

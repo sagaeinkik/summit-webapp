@@ -17,9 +17,10 @@ import { RouterView } from 'vue-router'
 
 .wrapper {
     height: 100vh; 
+    gap: 5em;
 
     img {
-        width: 30em;
+        width: 27em;
     }
 
     .box {

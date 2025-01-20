@@ -52,6 +52,7 @@ a {
     -moz-transition: 0.6s ease;
 }
 
+/*  Inloggningsruta/registrering */
 .box a {
     text-decoration: 2.3px dotted underline;
     color: #dfebec;
@@ -61,6 +62,47 @@ a {
     color: #bdd1bd;
 }
 
+/* Inlogg/registrering-formulär */
+.authform label {
+    display: block;
+    margin-top: 2em;
+}
+
+.authform input:not(input[type='submit']) {
+    width: 100%;
+    padding: 0.5em;
+    margin-top: 0.5em;
+    background-color: #0b4651;
+
+    /* Gradient border nertill */
+    border: 5px solid;
+    border-image-slice: 1;
+    border-width: 2px;
+    border-left: 0;
+    border-top: 0;
+    border-right: 0;
+    border-image-source: linear-gradient(to right, #bdd1bd, #0b4651);
+}
+
+/* Submit-knapp */
+.authform input[type='submit'] {
+    background-color: #082329;
+    color: #dfebec;
+    margin-top: 2em;
+    border-radius: 3em;
+    padding: 0.5em 2em;
+
+    &:hover {
+        background-color: #bdd1bd;
+        color: #082329;
+    }
+}
+
+input:focus {
+    outline: 1px solid #bdd1bd;
+}
+
+/* h1or i appen */
 .intro {
     width: fit-content;
 }

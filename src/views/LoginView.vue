@@ -1,6 +1,6 @@
 <template>
     <h1 class="text-center pb-4">Logga in</h1>
-    <form @submit.prevent="onSubmit">
+    <form @submit.prevent="onSubmit" class="authform">
         <span class="error text-red-400">{{ errorMessage }}</span>
         <!-- Användarnamn -->
         <div class="form-group">
@@ -22,6 +22,7 @@
 <script setup>
 import { RouterLink, useRouter } from 'vue-router';
 import { ref } from 'vue';
+import { cookieCreator } from '../utils/auth';
 
 //Router
 const router = useRouter();
@@ -84,68 +85,23 @@ async function login() {
             cookieCreator(data);
             // Lagra användarnamn
             sessionStorage.setItem("username", data.loggedInUser.username);  
-            loginInProgress.value = false;
+            // Skicka användaren till startsidan
             router.push("/")
         }
 
     } catch (error) {
         console.error("Error logging in:", error);
         errorMessage.value = "Ett fel uppstod vid inloggning. Försök igen senare.";
+    } finally {
         loginInProgress.value = false;
     }
 
 }
 
-async function cookieCreator(data) {
+/* async function cookieCreator(data) {
     document.cookie = `jwt=${data.token}; max-age=10800; path=/;`; //3h, samma som JWT-token
-}
+} */
 
 </script>
 
-<style lang="scss" scoped>
-@use "../assets/scss/vars" as v;
-
-//Sätter regler på upprepande taggar här
-label {
-    display: block;
-    margin-top: 2em;
-}
-
-input:not(input[type="submit"]) {
-    width: 100%;
-    padding: 0.5em;
-    margin-top: 0.5em;
-    background-color: v.$mediumdark;
-
-    //Gradient
-    border: 5px solid;
-    border-image-slice: 1;
-    border-width: 2px;
-    border-left: 0; 
-    border-top: 0; 
-    border-right: 0; 
-    border-image-source: linear-gradient(to right, v.$mediumlight, v.$mediumdark);
-
-}
-
-
-//Submit-knapp
-input[type="submit"] {
-    background-color: v.$dark;
-    color: v.$light;
-    margin-top: 2em;
-    border-radius: 3em;
-    padding: 0.5em 2em;
-
-    &:hover {
-        background-color: v.$mediumlight;
-        color: v.$dark;
-    }
-}
-
-input:focus {
-    outline: 1px solid v.$mediumlight; 
-}
-
-</style>
 
