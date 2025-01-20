@@ -4,21 +4,27 @@
             <img class="mt-3" src="../assets/images/summitlogo-white.svg" alt="Logotyp föreställande en björn">
         </RouterLink>
     <div class="logged-in text-white">
-        <p>Inloggad som [användarnamn]</p>
+        <p><span>Inloggad som </span>{{ username }}</p>
     </div>
-    <button class="bg-mediumdark text-white px-8 py-3 rounded-3xl hover:bg-medium">
+    <button @click="logout()" class="bg-mediumdark text-white px-8 py-3 rounded-3xl hover:bg-medium">
         Logga ut
     </button>
     </header>
 </template>
 
 <script setup>
-import { RouterLink, useRoute } from "vue-router"; 
-//Hämta användare ur cookies
+import { RouterLink, useRouter } from "vue-router"; 
+const router = useRouter();
 
-//Redirect om det inte finns användare
+//Hämta användarnamn 
+const username = sessionStorage.getItem("username");
 
-//Redirect till inlogg vid klick på logga ut
+//Radera cookie, rensa storage, skicka till login
+function logout() {
+    document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
+    sessionStorage.clear(); 
+    router.push("/login");
+}
 </script>
 
 
@@ -65,6 +71,16 @@ img {
 
     .logged-in {
         left: 0; 
+    }
+}
+
+@media (max-width: 500px) {
+    button {
+        font-size: 0.8em;
+    }
+
+    .logged-in span {
+        display: none;
     }
 }
 

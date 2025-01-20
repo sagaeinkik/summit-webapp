@@ -7,18 +7,30 @@
                         <span class="text-link">Översikt</span>
                 </RouterLink>
             </li>
-            <li><a href="#">
-                <i class="fa-solid fa-warehouse"></i>
-                <span>Lager</span></a></li>
-            <li><a href="#">
-                <i class="fa-solid fa-layer-group"></i>
-                <span class="text-link">Kategorier</span></a></li>
-            <li><a href="#">
-                <i class="fa-solid fa-dolly"></i>
-                <span class="text-link">Leverantörer</span></a></li>
-            <li><a href="#">
-                <i class="fa-solid fa-gear"></i>
-                <span class="text-link">Inställningar</span></a></li>
+            <li :class="{ current: isActive('/lager') }">
+                <RouterLink to="/lager">
+                        <i class="fa-solid fa-warehouse"></i>
+                        <span class="text-link">Lager</span>
+                </RouterLink>
+            </li>
+            <li :class="{ current: isActive('/kategorier') }">
+                <RouterLink to="/kategorier">
+                        <i class="fa-solid fa-layer-group"></i>
+                        <span class="text-link">Kategorier</span>
+                </RouterLink>
+            </li>
+            <li :class="{ current: isActive('/leverantorer') }">
+                <RouterLink to="/leverantorer">
+                        <i class="fa-solid fa-dolly"></i>
+                        <span class="text-link">Leverantörer</span>
+                </RouterLink>
+            </li>
+            <li :class="{ current: isActive('/settings') }">
+                <RouterLink to="/settings">
+                        <i class="fa-solid fa-gear"></i>
+                        <span class="text-link">Inställningar</span>
+                </RouterLink>
+            </li>
         </ul>
     </nav>    
 </template>
