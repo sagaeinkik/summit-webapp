@@ -12,6 +12,7 @@ export default {
             },
             borderRadius: {
                 'mega-xl': '4em',
+                'somewhat-mega-xl': '2.5em',
             },
             width: {
                 '15percent': '15%',

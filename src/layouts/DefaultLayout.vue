@@ -8,14 +8,14 @@
             <RouterView />
         </main>
     </div>
-    <div v-if="!isDesktop">
+    <div v-if="!isDesktop" class="nav-spacer">
         <NavbarMobile />
     </div>
 </template>
 
 <script setup>
 import { ref, onMounted } from "vue"; 
-import { RouterLink, RouterView } from 'vue-router'
+import { RouterView } from 'vue-router'
 import Banner from "../components/Banner.vue";
 import NavbarDesktop from '../components/NavbarDesktop.vue';
 import NavbarMobile from "../components/NavbarMobile.vue";
@@ -49,6 +49,7 @@ onMounted(() => {
 main {
     width: 85%;
     max-width: 1800px; 
+    overflow-y: scroll;
 }
 
 @media (max-width: 1290px) {
@@ -66,14 +67,22 @@ main {
 @media (max-width: 550px) {
     .content-wrapper {
         display: initial;
+        padding-bottom: 2em;
     }
 
     main {
         width: 96%; 
         margin: auto;
         margin-top: 1em; 
-        min-height: 80vh;
+        height: calc(100vh - 170px)
+;        overflow-y: auto;
         border-radius: 35px; 
+        margin-bottom: 2em;
+        position: relative; 
+    }
+
+    .nav-spacer {
+        height: 2em;
     }
 }
 

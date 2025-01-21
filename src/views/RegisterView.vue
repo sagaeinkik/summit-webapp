@@ -14,7 +14,7 @@
             <input type="password" name="password" id="password" v-model="password">
         </div>
 
-        <input type="submit" :value="loginInProgress ? 'Loggar in...' : 'Logga in'">
+        <input type="submit" :value="registerInProgress ? 'Registrerar...' : 'Registrera'">
     </form>
     <p class="text-xs pt-4">Har du redan ett konto? <RouterLink to="/login">Logga in</RouterLink> istället.</p>
 </template>
@@ -31,7 +31,7 @@ const router = useRouter();
 const username = ref(""); 
 const password = ref(""); 
 
-const loginInProgress = ref(false); 
+const registerInProgress = ref(false); 
 const errorMessage = ref(""); // Lagra felmeddelanden
 
 //Validera input
@@ -45,10 +45,10 @@ const validateInput = () => {
 
 //Kontrollera 
 async function onSubmit() {
-    loginInProgress.value = true; 
+    registerInProgress.value = true; 
     //Validera
     if(!validateInput()) {
-        loginInProgress.value = false; 
+        registerInProgress.value = false; 
         return; 
     }
     console.log('Form submitted');
@@ -89,7 +89,7 @@ async function signup() {
     } catch (error) {
         console.error('Något gick fel vid registrering:', error);
     } finally {
-        loginInProgress.value = false;
+        registerInProgress.value = false;
     }
 }
 </script>
