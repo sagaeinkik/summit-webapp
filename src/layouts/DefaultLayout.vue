@@ -74,8 +74,9 @@ main {
         width: 96%; 
         margin: auto;
         margin-top: 1em; 
-        height: calc(100vh - 170px)
-;        overflow-y: auto;
+        height: calc(100vh - 170px);
+        max-height: 2000px;
+;       overflow-y: auto;
         border-radius: 35px; 
         margin-bottom: 2em;
         position: relative; 

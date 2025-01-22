@@ -3,15 +3,15 @@
     <form @submit.prevent="onSubmit" class="authform">
         <span class="error text-red-400">{{ errorMessage }}</span>
         <!-- Användarnamn -->
-        <div class="form-group">
-            <label for="username">Användarnamn:</label>
-            <input type="text" name="username" id="username" v-model="username">
+        <div class="auth-input">
+            <label for="username" class="block mt-8">Användarnamn:</label>
+            <input type="text" name="username" id="username" v-model="username" class="w-full p-2 mt-4 bg-mediumdark">
         </div>
 
         <!-- Lösenord -->
-        <div class="form-group">
-            <label for="password">Lösenord:</label>
-            <input type="password" name="password" id="password" v-model="password">
+        <div class="auth-input">
+            <label for="password" class="block mt-8">Lösenord:</label>
+            <input type="password" name="password" id="password" v-model="password" class="w-full p-2 mt-4 bg-mediumdark">
         </div>
 
         <input type="submit" :value="loginInProgress ? 'Loggar in...' : 'Logga in'">
@@ -97,11 +97,8 @@ async function login() {
     }
 
 }
-
-/* async function cookieCreator(data) {
-    document.cookie = `jwt=${data.token}; max-age=10800; path=/;`; //3h, samma som JWT-token
-} */
-
 </script>
 
-
+<style lang="scss" scoped>
+@use "../assets/scss/forms" as f; 
+</style>

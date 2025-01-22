@@ -1,0 +1,33 @@
+@use './vars' as v;
+
+table {
+    font-family: v.$logs;
+    font-size: 0.85em;
+}
+
+th {
+    text-align: left;
+    font-weight: 400;
+    font-size: 1.1em;
+    padding: 0.5em 1em;
+}
+
+td {
+    border-bottom: 1px solid v.$medium;
+    padding: 0.5em 1em;
+}
+
+td.edit {
+    text-align: center;
+}
+
+//Ikon
+i {
+    color: v.$medium;
+    font-size: 1.3em;
+}
+
+//Varannan vit
+tr:nth-child(even) {
+    background-color: white;
+}

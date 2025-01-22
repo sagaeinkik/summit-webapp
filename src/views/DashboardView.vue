@@ -16,9 +16,14 @@ import DashInfoComponent from "../components/DashInfo.vue";
 
 
 <style lang="scss" scoped>
-    .info-wrapper {
-        width: 80%;
-    }
+
+.intro {
+    width: fit-content;
+}
+
+.info-wrapper {
+    width: 80%;
+}
 
 @media (max-width: 1600px) {
     .info-wrapper {

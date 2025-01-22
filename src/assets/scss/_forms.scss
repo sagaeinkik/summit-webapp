@@ -1,0 +1,94 @@
+@use './vars' as v;
+
+input:focus,
+select:focus {
+    outline: 1px solid v.$medium;
+}
+
+/* Inlogg/registrering-formulär */
+.authform {
+    input:not(input[type='submit']) {
+        /* Gradient border nertill */
+        border: 5px solid;
+        border-image-slice: 1;
+        border-width: 2px;
+        border-left: 0;
+        border-top: 0;
+        border-right: 0;
+        border-image-source: linear-gradient(to right, v.$mediumlight, v.$mediumdark);
+    }
+}
+
+/* Submit-knapp */
+.authform input[type='submit'] {
+    background-color: v.$dark;
+    color: v.$light;
+    margin-top: 2em;
+    border-radius: 3em;
+    padding: 0.5em 2em;
+
+    &:hover {
+        background-color: v.$mediumlight;
+        color: v.$dark;
+    }
+}
+
+//Formulär som lägga till eller ändra produkt, leverantör eller kategori
+.overlay-form {
+    width: 100%;
+
+    label {
+        display: block;
+        margin-left: 1em;
+        margin-bottom: 0.2em;
+    }
+
+    input,
+    select {
+        width: 100%;
+        margin-bottom: 1em;
+        border-radius: 1em;
+        padding: 0.3em 0.8em;
+    }
+
+    //Två fält bredvid varandra
+    .input-group {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 1em;
+    }
+    //Knappar
+    .form-controls {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 0.5em;
+
+        input {
+            @include v.transition;
+            background-color: v.$mediumdark;
+            color: v.$light;
+            padding: 0.6em 2em;
+            border-radius: 2em;
+            width: fit-content;
+            cursor: pointer;
+
+            &:hover {
+                background-color: v.$medium;
+                color: white;
+            }
+        }
+
+        input[type='reset'] {
+            background-color: v.$mediumlight;
+            color: v.$mediumdark;
+
+            &:hover {
+                background-color: v.$medium;
+                color: v.$dark;
+            }
+        }
+    }
+}
+
+@media (max-width: 1500px) {
+}

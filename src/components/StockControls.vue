@@ -11,7 +11,6 @@ import AddButton from "./AddButton.vue"
 import SearchBar from "./SearchBar.vue"
 import SelectList from "./SelectList.vue"
 
-
 //Listan med options 
 const productFilterOptions = [
     { value: "product_id", label: "ProduktID"}, 
