@@ -29,8 +29,6 @@ async function fetchProducts() {
         const response = await fetch(apiUrl + '/products'); 
         const data = await response.json(); 
         productCount.value = data.length;
-
-        console.log(productCount.value);
     } catch (error) {
         console.error(error);
     }
@@ -42,8 +40,6 @@ async function fetchSuppliers() {
         const response = await fetch(apiUrl + "/suppliers"); 
         const data = await response.json();
         supplierCount.value = data.length;
-
-        console.log(supplierCount.value);
     } catch (error) {
         console.error(error);
     }
@@ -55,8 +51,6 @@ async function fetchCategories() {
         const response = await fetch(apiUrl + "/categories"); 
         const data = await response.json();
         categoryCount.value = data.length;
-
-        console.log(categoryCount.value);
     } catch (error) {
         console.error(error);
     }

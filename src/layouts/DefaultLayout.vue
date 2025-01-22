@@ -42,7 +42,7 @@ onMounted(() => {
 
 .content-wrapper {
     width: 95%; 
-    height: 90vh;
+    height: calc(100vh - 115px);
     margin-top: 2em;
 }
 

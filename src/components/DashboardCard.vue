@@ -11,6 +11,7 @@
 
 <script setup>
 import { RouterLink } from 'vue-router';
+import { defineProps } from "vue"; 
 //Ta emot props
 defineProps({
     count: {
@@ -56,7 +57,7 @@ h2 {
 }
 
 a {
-    padding: 1em 2em;
+    padding: 0.7em 2em;
 
     &:hover {
         background-color: v.$medium; 
@@ -72,7 +73,7 @@ a {
     }
 
     a {
-        padding: 0.8em 1.4em;
+        padding: 0.6em 1.4em;
         font-size: 0.9em;
     }
 }

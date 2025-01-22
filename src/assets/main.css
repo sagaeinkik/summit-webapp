@@ -107,6 +107,26 @@ input:focus {
     width: fit-content;
 }
 
+table {
+    font-family: 'Azeret Mono', Courier, monospace;
+    font-size: 0.85em;
+}
+
+th {
+    text-align: left;
+    padding-right: 1em;
+    font-weight: 400;
+    font-size: 1.1em;
+}
+
+td {
+    border-bottom: 1px solid #429698;
+}
+
+tr:nth-child(even) {
+    background-color: white;
+}
+
 @media (max-width: 550px) {
     h1 {
         font-size: 1.5em;
