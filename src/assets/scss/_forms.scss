@@ -90,5 +90,9 @@ select:focus {
     }
 }
 
-@media (max-width: 1500px) {
+@media (max-width: 600px) {
+    //Gör om vissa grupper till kolumner
+    .input-group.ss-col {
+        grid-template-columns: 1fr;
+    }
 }

@@ -4,7 +4,7 @@
         <div v-if="isDesktop" class="nav-cont h-full w-15percent">
             <NavbarDesktop />
         </div>
-        <main class="bg-light py-4 px-6 lg:px-14 rounded-mega-xl">
+        <main class="bg-light lg:px-14 rounded-mega-xl">
             <RouterView />
         </main>
     </div>
@@ -40,6 +40,7 @@ onMounted(() => {
 <style scoped lang="scss">
 @use "../assets/scss/vars" as v; 
 
+//Runt allting
 .content-wrapper {
     width: 95%; 
     height: calc(100vh - 115px);
@@ -52,9 +53,13 @@ main {
     overflow-y: scroll;
 }
 
-@media (max-width: 1290px) {
+
+//Media queries
+@media (max-width: 1355px) {
+    //Bredda, minska padding
     main {
         width: 100%;
+        padding: 1em;
     }
 }
 
@@ -65,11 +70,13 @@ main {
 }
 
 @media (max-width: 550px) {
+    //Ta bort flexet
     .content-wrapper {
         display: initial;
         padding-bottom: 2em;
     }
 
+    //Justera om Main för att anpassa till mobil-läget
     main {
         width: 96%; 
         margin: auto;
@@ -82,6 +89,7 @@ main {
         position: relative; 
     }
 
+    //Utrymme mellan main och navbar
     .nav-spacer {
         height: 2em;
     }

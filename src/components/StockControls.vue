@@ -1,8 +1,8 @@
 <template>
-<div class="ctrl-grid-wrap grid gap-8 items-center">
-    <AddButton @addToTable="handleAddProduct"/>
-    <SearchBar @search="handleSearchFilter"/>
-    <SelectList name="product-filter" :options="productFilterOptions" @filterChange="handleFilterChange" class="justify-self-end"/>
+<div class="ctrl-grid-wrap grid gap-8 items-end">
+    <AddButton id="add" @addToTable="handleAddProduct" :addProductActivated="addProductActivated"/>
+    <SearchBar id="searchbar" @search="handleSearchFilter"/>
+    <SelectList id="select" name="product-filter" :options="productFilterOptions" @filterChange="handleFilterChange" class="justify-self-end"/>
 </div>
 </template>
 
@@ -20,6 +20,11 @@ const productFilterOptions = [
     { value: "size", label: "Storlek"}, 
     { value: "extra", label: "Extra"}
 ]; 
+
+//Ta emot props från StockView: 
+const props = defineProps({
+    addProductActivated: Boolean
+})
 
 /* Emitta alla vidare till Stockview */
 const emit = defineEmits(["addProduct", "search", "filterChange"]);
@@ -43,5 +48,34 @@ const handleFilterChange = (selectedValue) => {
 
 .ctrl-grid-wrap {
     grid-template-columns: 1fr 2fr 1fr;
+}
+
+@media (max-width: 800px) {
+    .ctrl-grid-wrap {
+        gap: 1em;
+
+    }
+}
+
+@media (max-width: 600px) {
+    .ctrl-grid-wrap {
+        grid-template-areas: "add select select" "searchbar searchbar searchbar"; 
+
+        //Knapp
+        #add {
+            grid-area: add;
+        }
+
+        //lista
+        #select {
+            grid-area: select;
+        }
+
+        //sökfält
+        #searchbar {
+            grid-area: searchbar;
+        }
+
+    }
 }
 </style>

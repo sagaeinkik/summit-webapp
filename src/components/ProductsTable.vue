@@ -27,7 +27,8 @@
                 <td :title="product.in_price">{{ product.in_price }}</td>
                 <td :title="product.out_price">{{ product.out_price }}</td>
                 <td :title="product.amount">{{ product.amount }}</td>
-                <td class="edit"><i class="fa-solid fa-gear"></i></td>
+                <!-- Redigera-ikon: skicka med produkten med emit -->
+                <td class="edit cursor-pointer" @click="() => handleClick(product)"><i class="fa-solid fa-gear"></i></td>
             </tr>
         </tbody>
     </table>
@@ -64,6 +65,12 @@ onMounted(() => {
     fetchProducts();
     filterProducts();
 })
+
+//Emits
+const emit = defineEmits(["editProduct"]);
+const handleClick = (product) => {
+    emit("editProduct", product);
+}
 
 async function fetchProducts() {
     try {
@@ -107,11 +114,15 @@ function sortProducts(sortBy) {
 @use "../assets/scss/vars" as v;
 @use "../assets/scss/tables" as t;
 
+
+//Runt hela tabellen
 .table-wrapper {
     overflow: auto;
     height: calc(100vh - 375px);
 }
 
+
+//Minska tabellens kolumner, klipp av med punkter
 @media (max-width: 1500px) {
 td {  
   max-width: 100px;
@@ -119,5 +130,17 @@ td {
   overflow: hidden;
   text-overflow: ellipsis;
 }
+}
+
+
+//Minska textstorlekar
+@media (max-width: 1200px) {
+    th {
+        font-size: 0.9em;
+    }
+
+    td {
+        font-size: 0.85em;
+    }
 }
 </style>

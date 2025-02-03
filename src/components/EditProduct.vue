@@ -1,9 +1,9 @@
 <template>
 <div class="bg-light p-4 absolute rounded-3xl form-wrapper">
-        <div class="headline relative">
-            <h2 class="text-center">Registrera ny produkt</h2>
-            <button class="absolute close" @click="handleClick">&#10540;</button>
-        </div>
+    <div class="headline relative">
+        <h2 class="text-center">Ändra produkt</h2>
+        <button class="absolute close" @click="handleClick">&#10540;</button>
+    </div>
     <p v-if="errors" class="text-red-600 font-medium ml-3">{{ errors }}</p>
     <form @submit.prevent class="overlay-form mt-4">
 
@@ -12,13 +12,13 @@
             <!-- ID -->
             <div class="form-input">
                 <label for="productId">ProduktID*:</label>
-                <input type="text" name="productId" id="productId">
+                <input type="text" v-model="formData.product_id" name="productId" id="productId">
             </div>
 
             <!-- Produktnamn -->
             <div class="form-input">
                 <label for="productName">Produktnamn*:</label>
-                <input type="text" name="productName" id="productName">
+                <input type="text"  v-model="formData.product_name" name="productName" id="productName">
             </div>
         </div>
 
@@ -27,19 +27,19 @@
             <!-- Storlek -->
             <div class="form-input">
                 <label for="size">Storlek:</label>
-                <input type="text" name="size" id="size">
+                <input type="text" v-model="formData.size"  name="size" id="size">
             </div>
             <!-- Extra -->
             <div class="form-input">
                 <label for="extra">Extra:</label>
-                <input type="text" name="extra" id="extra">
+                <input type="text"  v-model="formData.extra" name="extra" id="extra">
             </div>
         </div> 
 
         <!-- Antal -->
         <div class="form-input">
             <label for="amount">Lagersaldo*:</label>
-            <input type="number" name="amount" id="amount">
+            <input type="number"  v-model="formData.amount" name="amount" id="amount">
         </div>
 
         <!-- Grupp -->
@@ -47,12 +47,12 @@
             <!-- Inpris -->
             <div class="form-input">
                 <label for="inPrice">Inpris*:</label>
-                <input type="number" name="inPrice" id="inPrice">
+                <input type="number"  v-model="formData.in_price" name="inPrice" id="inPrice">
             </div>
             <!-- Utpris -->
             <div class="form-input">
                 <label for="outPrice">Utpris*:</label>
-                <input type="number" name="outPrice" id="outPrice">
+                <input type="number"  v-model="formData.out_price" name="outPrice" id="outPrice">
             </div>
         </div>
 
@@ -61,7 +61,7 @@
             <!-- Leverantör -->
             <div class="form-input">
                 <label for="supplierId">Leverantör*:</label>
-                <select name="supplierId" id="supplierId">
+                <select v-model="formData.supplier_id" name="supplierId" id="supplierId">
                     <option value="" disabled selected>Välj i listan</option>
                     <option v-for="supplier in suppliers" :key="supplier.id" :value="supplier.id">{{ supplier.company_name}}</option>
                 </select>
@@ -69,7 +69,7 @@
             <!-- Kategori -->
             <div class="form-input">
                 <label for="categoryId">Kategori*:</label>
-                <select name="categoryId" id="categoryId">
+                <select v-model="formData.category_id" name="categoryId" id="categoryId">
                     <option value="" disabled selected>Välj i listan</option>
                     <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.category_name}}</option>
                 </select>
@@ -78,8 +78,8 @@
 
         <!-- Knappar -->
         <div class="form-controls">
-            <input type="submit" value="Lägg till">
-            <input type="reset" value="Nollställ">
+            <input type="submit" value="Uppdatera">
+            <input type="reset" value="Radera produkt">
         </div>
     </form>
 </div>
@@ -90,9 +90,29 @@ import { onMounted, ref } from 'vue';
 
 
 //Reaktiva variabler
-const suppliers = ref([]);
-const categories = ref([]);
-const errors = ref("");
+const suppliers = ref([]); //Leverantörslista
+const categories = ref([]); //Kategorilista
+const errors = ref(""); //Eventuella errormeddelanden
+const formData = ref({
+    product_id: "", 
+    product_name: "", 
+    size: "", 
+    extra: "", 
+    amount: 0, 
+    in_price: 0, 
+    out_price: 0, 
+    supplier_id: 0, 
+    category_id: 0
+}); //Reaktivt formulär
+
+
+//Ta emot produkt från StockView 
+const props = defineProps({
+    product: {
+        type: Object, 
+        required: true
+    }
+})
 
 //Api
 let apiUrl = "https://summitapi.up.railway.app";
@@ -117,15 +137,38 @@ async function fetchCategories() {
     }
 }
 
-onMounted(() => {
-    fetchSuppliers();
-    fetchCategories();
+onMounted(async () => {
+    // Vänta på att båda fetch-anropen är klara
+    await Promise.all([fetchSuppliers(), fetchCategories()]);
+    
+    //Matcha supplier-name med supplier-id
+    const matchedSupplier = suppliers.value.find(
+        s => s.company_name === props.product.supplier_name
+    );
+    
+    //Samma sak med kategori
+    const matchedCategory = categories.value.find(
+        c => c.category_name === props.product.category_name
+    );
+
+    //Fyll i formuläret med produktens data (och matchad leverantör/kategori)
+    formData.value = {
+        product_id: props.product.product_id,
+        product_name: props.product.product_name,
+        size: props.product.size || '',
+        extra: props.product.extra || '',
+        amount: props.product.amount,
+        in_price: props.product.in_price,
+        out_price: props.product.out_price,
+        supplier_id: matchedSupplier?.id,
+        category_id: matchedCategory?.id
+    }
 });
 
-//Emit
-const emit = defineEmits(["closeAdd"]);
+//Emit för att stänga edit-formuläret.
+const emit = defineEmits(["closeEdit"]);
 const handleClick = (event) => {
-    emit("closeAdd");
+    emit("closeEdit");
 }
 
 </script>

@@ -73,7 +73,7 @@ async function login() {
         const data = await response.json(); 
 
         //Om felmeddelande
-        if (response.status === 404) {
+        if (response.status === 404 || response.status === 401) {
             errorMessage.value = data.message;
             loginInProgress.value = false; 
             return; 
