@@ -3,7 +3,7 @@
     <p class="mb-4">Antal produkter: {{ filteredProducts.length }} </p>
     <table class="w-full">
         <thead class="bg-medium text-light">
-            <tr>
+            <tr class="cursor-default">
                 <th class="rounded-tl-2xl" @click="sortProducts('product_id')">ProduktID</th>
                 <th @click="sortProducts('product_name')">Produktnamn</th>
                 <th @click="sortProducts('size')">Storlek</th>
@@ -17,7 +17,8 @@
             </tr>
         </thead>
         <tbody v-if="filteredProducts.length > 0">
-            <tr v-for="product in filteredProducts" :key="product.product_id">
+            <!-- Loopa igenom alla produkter: lägg på en dubbelklick på varje rad -->
+            <tr v-for="product in filteredProducts" :key="product.product_id" @dblclick="() => handleClick(product)" class="cursor-pointer">
                 <td :title="product.product_id">{{ product.product_id }}</td>
                 <td :title="product.product_name">{{ product.product_name }}</td>
                 <td :title="product.size">{{ (product.size) ? product.size : "-" }}</td>
@@ -36,7 +37,7 @@
 </template>
 
 <script setup>
-import { ref, onMounted, watch } from "vue"; 
+import { ref, onMounted, watch, defineExpose } from "vue"; 
 import { sortArray } from "../utils/sort";
 
 
@@ -108,6 +109,11 @@ function sortProducts(sortBy) {
     //Använd sorteringsfunktion från utils/sort
     filteredProducts.value = sortArray(filteredProducts.value, sortBy, latestSort);
 }
+
+//Exponera fetch-anropet så man kan uppdatera från StockView
+defineExpose({
+    fetchProducts
+});
 </script>
 
 <style lang="scss" scoped>

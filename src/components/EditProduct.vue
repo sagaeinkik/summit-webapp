@@ -1,11 +1,16 @@
 <template>
 <div class="bg-light p-4 absolute rounded-3xl form-wrapper">
     <div class="headline relative">
-        <h2 class="text-center">Ändra produkt</h2>
+        <h2 class="text-center">Ändra produkt {{ formData.product_name }} </h2>
         <button class="absolute close" @click="handleClick">&#10540;</button>
     </div>
+    <!-- Meddelanden till användare -->
     <p v-if="errors" class="text-red-600 font-medium ml-3">{{ errors }}</p>
-    <form @submit.prevent class="overlay-form mt-4">
+    <p v-if="successMsg">{{ successMsg }}</p>
+
+    <p v-if="!showForm">Stänger fönster...</p>
+    <!-- Formulär! -->
+    <form v-if="showForm" @submit.prevent class="overlay-form mt-4">
 
         <!-- Grupp -->
         <div class="input-group ss-col">
@@ -78,8 +83,8 @@
 
         <!-- Knappar -->
         <div class="form-controls">
-            <input type="submit" value="Uppdatera">
-            <input type="reset" value="Radera produkt">
+            <input @click="handleSubmit" type="submit" value="Uppdatera">
+            <button @click="() => handleDelete(product)" class="deleteBtn">Radera produkt</button>
         </div>
     </form>
 </div>
@@ -87,12 +92,18 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
+import { getCookie } from "../utils/auth";
+
+//Hämta token från cookie
+const userToken = getCookie("jwt");
+
 
 
 //Reaktiva variabler
 const suppliers = ref([]); //Leverantörslista
 const categories = ref([]); //Kategorilista
-const errors = ref(""); //Eventuella errormeddelanden
+const errors = ref(""); //Eventuella errorm
+const successMsg = ref(""); //Succémeddelande
 const formData = ref({
     product_id: "", 
     product_name: "", 
@@ -104,6 +115,7 @@ const formData = ref({
     supplier_id: 0, 
     category_id: 0
 }); //Reaktivt formulär
+const showForm = ref(true); //Visa formuläret
 
 
 //Ta emot produkt från StockView 
@@ -170,6 +182,119 @@ const emit = defineEmits(["closeEdit"]);
 const handleClick = (event) => {
     emit("closeEdit");
 }
+const handleDelete = (product) => {
+    deleteProduct(product); 
+}
+
+/* UPPDATERA */
+//Kontrollera input (finns även i backend)
+function validateInput() {
+    //Töm errors först
+    errors.value = "";
+
+    //Tomma fält
+    if (
+        formData.value.product_id.trim() === "" || 
+        formData.value.product_name.trim() === "" || 
+        formData.value.amount === "" || 
+        formData.value.in_price === "" || 
+        formData.value.out_price === "" ||  
+        formData.value.supplier_id === "" || 
+        formData.value.category_id === ""
+    ) {
+        errors.value = "Fyll i alla obligatoriska fält (markerade med *)!";
+        return false;
+    } 
+
+    //Negativa siffror
+    if (
+        formData.value.amount < 0 || 
+        formData.value.in_price < 0 || 
+        formData.value.out_price < 0
+    ) {
+        errors.value = "Siffror kan ej vara negativa!";
+        return false;
+    }
+
+    return true;
+}
+
+//Hantera submit
+function handleSubmit() {
+    if(!validateInput()) {
+        return;
+    }
+
+    //Byt nyckelnamn från snake_case till camelCase 
+    const productToUpdate = {
+        productId: formData.value.product_id,
+        productName: formData.value.product_name,
+        size: formData.value.size,
+        extra: formData.value.extra,
+        amount: Number(formData.value.amount),
+        inPrice: Number(formData.value.in_price),
+        outPrice: Number(formData.value.out_price),
+        categoryId: Number(formData.value.category_id),
+        supplierId: Number(formData.value.supplier_id)
+    };
+
+    //Anropa lägg till-funktion
+    updateProduct(productToUpdate);
+}
+
+async function updateProduct(product) {
+    try {
+
+        //Fetchanrop med gamla produkt-ID:et
+        const response = await fetch(`${apiUrl}/products/id=${props.product.product_id}`, {
+            method: "PUT",
+            headers: {
+                "Content-Type": "application/json",
+                "Authorization": `Bearer ${userToken}`
+            },
+            body: JSON.stringify(product)
+        });
+        const data = await response.json();
+
+        if(!response.ok) {
+            errors.value = "Något gick fel: " + data.message;
+        } else {
+            //Succé!
+            successMsg.value = product.productName + " har uppdaterats!";
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
+
+/* RADERA PRODUKT */
+async function deleteProduct(product) {
+    try {
+        const response = await fetch(`${apiUrl}/products/id=${product.product_id}`, {
+            method: "DELETE",
+            headers: {
+                "Authorization": `Bearer ${userToken}`
+            }
+        });
+        const data = await response.json();
+
+        //Kolla felmeddelande
+        if(!response.ok) {
+            errors.value = "Något gick fel: " + data.message;
+        } else {
+            //Succé!
+            successMsg.value = product.product_name + " har raderats!";
+            //Dölj formulär
+            showForm.value = false;
+            //Stäng formulär efter 10 sek
+            setTimeout(() => {
+                emit("closeEdit");
+            }, 3500);
+        }
+    } catch (error) {
+        console.error(error);
+    }
+}
 
 </script>
 
@@ -190,6 +315,7 @@ const handleClick = (event) => {
     right: 0.2em;
     font-size: 3em; 
 }
+
 
 //Bredda formulär
 @media (max-width: 900px) {

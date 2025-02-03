@@ -8,7 +8,7 @@
         <div class="overlay" v-if="editProductActivated">
             <EditProduct :product="selectedProduct" @closeEdit="closeEdit" />
         </div>
-        <ProductsTable  @editProduct="editProduct" :search="searchString" :filter="selectedFilter"/>
+        <ProductsTable ref="productsTable" @editProduct="editProduct" :search="searchString" :filter="selectedFilter"/>
     </div>
 </template>
 
@@ -17,7 +17,7 @@ import StockControls from "../components/StockControls.vue";
 import ProductsTable from "../components/ProductsTable.vue";
 import ProductForm from "../components/ProductForm.vue";
 import EditProduct from "../components/EditProduct.vue";
-import { ref } from "vue";
+import { ref, watch } from "vue";
 
 
 //Reaktiva variabler
@@ -26,6 +26,7 @@ let selectedFilter = ref("product_id"); //Select-lista
 let addProductActivated = ref(false);  //Om addProduct-formuläret ska visas
 let editProductActivated = ref(false); //Om editProduct-formulär ska visas
 let selectedProduct = ref(null); //Vald produkt för redigering
+let productsTable = ref(null); //Referens till ProductsTable för att komma åt metoden fetchProducts
 
 
 //Lagra om AddProduct är aktiverad, byt värde för varje knappklick
@@ -59,6 +60,17 @@ const handleFilterChange = (selectedValue) => {
     selectedFilter.value = selectedValue;
 }
 
+//watcher för att hämta tabellen igen baserat på om formulären har stängts
+watch([addProductActivated, editProductActivated], (newValues) => {
+    //Nya värden för add och edit
+    const [newAddValue, newEditValue] = newValues;
+
+    //Om nya värdena är false (dvs formulären har stängts) och tabellen finns
+    if ((!newAddValue || !newEditValue) && productsTable.value) {
+        //Anropa metoden från ProductsTable
+        productsTable.value.fetchProducts();
+    }
+})
 
 </script>
 

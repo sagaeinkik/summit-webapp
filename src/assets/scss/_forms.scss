@@ -63,7 +63,8 @@ select:focus {
         justify-content: space-between;
         margin-top: 0.5em;
 
-        input {
+        input,
+        .deleteBtn {
             @include v.transition;
             background-color: v.$mediumdark;
             color: v.$light;
@@ -78,7 +79,8 @@ select:focus {
             }
         }
 
-        input[type='reset'] {
+        input[type='reset'],
+        .deleteBtn {
             background-color: v.$mediumlight;
             color: v.$mediumdark;
 
@@ -86,6 +88,10 @@ select:focus {
                 background-color: v.$medium;
                 color: v.$dark;
             }
+        }
+
+        .deleteBtn {
+            height: fit-content;
         }
     }
 }
