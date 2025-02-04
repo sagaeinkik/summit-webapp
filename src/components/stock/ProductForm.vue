@@ -233,33 +233,4 @@ async function addProduct() {
 <style lang="scss" scoped>
 @use "../../assets/scss/vars" as v;
 @use "../../assets/scss/forms" as f;
-
-.form-wrapper {
-    width: 70%;
-    height: 97%;
-    max-height: 800px;
-    overflow-y: auto;
-}
-
-//stäng-knapp: 
-.close {
-    top: -0.4em; 
-    right: 0.2em;
-    font-size: 3em; 
-}
-
-//Bredda formulär
-@media (max-width: 900px) {
-    .form-wrapper {
-        width: 90%;
-    }
-}
-
-
-//Ännu mer!
-@media (max-width: 670px) {
-    .form-wrapper {
-        width: 95%;
-    }
-}
 </style>

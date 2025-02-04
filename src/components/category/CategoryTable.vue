@@ -93,6 +93,11 @@ const emit = defineEmits(["handleEdit"]);
 const handleClick = (category) => {
     emit("handleEdit", category);
 }
+
+//Expose:a fetchmetoden
+defineExpose({
+    getCategories
+});
 </script>
 
 <style lang="scss" scoped>

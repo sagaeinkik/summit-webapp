@@ -286,7 +286,7 @@ async function deleteProduct(product) {
             successMsg.value = product.product_name + " har raderats!";
             //Dölj formulär
             showForm.value = false;
-            //Stäng formulär efter 10 sek
+            //Stäng formulär efter 3,5 sek
             setTimeout(() => {
                 emit("closeEdit");
             }, 3500);
