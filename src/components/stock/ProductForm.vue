@@ -88,7 +88,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { getCookie } from "../utils/auth";
+import { getCookie } from "../../utils/auth";
 
 
 //Reaktiva variabler
@@ -231,8 +231,8 @@ async function addProduct() {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/scss/vars" as v;
-@use "../assets/scss/forms" as f;
+@use "../../assets/scss/vars" as v;
+@use "../../assets/scss/forms" as f;
 
 .form-wrapper {
     width: 70%;

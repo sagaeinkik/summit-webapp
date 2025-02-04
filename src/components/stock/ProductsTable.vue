@@ -29,7 +29,7 @@
                 <td :title="product.out_price">{{ product.out_price }}</td>
                 <td :title="product.amount">{{ product.amount }}</td>
                 <!-- Redigera-ikon: skicka med produkten med emit -->
-                <td class="edit cursor-pointer" @click="() => handleClick(product)"><i class="fa-solid fa-gear"></i></td>
+                <td class="edit" @click="() => handleClick(product)"><i class="fa-solid fa-gear"></i></td>
             </tr>
         </tbody>
     </table>
@@ -38,7 +38,7 @@
 
 <script setup>
 import { ref, onMounted, watch, defineExpose } from "vue"; 
-import { sortArray } from "../utils/sort";
+import { sortArray } from "../../utils/sort";
 
 
 //Initiera lite arrayer
@@ -92,9 +92,9 @@ function filterProducts() {
 
     //Filtrera produkter
     filteredProducts.value = allProducts.value.filter(product => {
-        const searchVaue = props.search.toLowerCase(); 
+        const searchValue = props.search.toLowerCase(); 
         const fieldValue = String(product[props.filter]).toLowerCase(); 
-        return fieldValue.includes(searchVaue);
+        return fieldValue.includes(searchValue);
     })
 }
 
@@ -117,36 +117,6 @@ defineExpose({
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/scss/vars" as v;
-@use "../assets/scss/tables" as t;
-
-
-//Runt hela tabellen
-.table-wrapper {
-    overflow: auto;
-    height: calc(100vh - 375px);
-}
-
-
-//Minska tabellens kolumner, klipp av med punkter
-@media (max-width: 1500px) {
-td {  
-  max-width: 100px;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-}
-
-
-//Minska textstorlekar
-@media (max-width: 1200px) {
-    th {
-        font-size: 0.9em;
-    }
-
-    td {
-        font-size: 0.85em;
-    }
-}
+@use "../../assets/scss/vars" as v;
+@use "../../assets/scss/tables" as t;
 </style>

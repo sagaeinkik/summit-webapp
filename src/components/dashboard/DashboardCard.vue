@@ -38,7 +38,7 @@ defineProps({
 </script>
 
 <style scoped lang="scss">
-@use "../assets/scss/vars" as v;
+@use "../../assets/scss/vars" as v;
 h2 {
     font-size: 6em;
     font-family: v.$logs;

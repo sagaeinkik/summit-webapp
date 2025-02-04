@@ -1,5 +1,5 @@
 <template>
-    <header class="text-light m-auto mt-3 md:mt-6 flex justify-between items-center">
+    <header class="text-light m-auto mt-4 md:mt-6 flex justify-between items-center">
         <RouterLink to="/">
             <img class="mt-3" src="../assets/images/summitlogo-white.svg" alt="Logotyp föreställande en björn">
         </RouterLink>
@@ -34,6 +34,7 @@ function logout() {
 header {
     width: 95%;
     position: relative;
+    top: 1em;
 }
 
 img {
@@ -55,7 +56,7 @@ img {
     }
 }
 
-@media(max-width: 1000px) {
+@media(max-width: 1100px) {
     img {
         left: 0; 
         width: 6em;
@@ -71,6 +72,12 @@ img {
 
     .logged-in {
         left: 0; 
+    }
+}
+
+@media (max-width: 550px) {
+    header {
+        top: 0.5em;
     }
 }
 

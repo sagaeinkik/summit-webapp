@@ -10,8 +10,8 @@
 </template>
 
 <script setup>
-import LogComponent from "../components/LogComponent.vue";
-import DashInfoComponent from "../components/DashInfo.vue";
+import LogComponent from "../components/dashboard/LogComponent.vue";
+import DashInfoComponent from "../components/dashboard/DashInfo.vue";
 </script>
 
 

@@ -112,7 +112,7 @@ async function fetchLogs() {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/scss/vars" as v; 
+@use "../../assets/scss/vars" as v; 
 
 
 .grid-wrap {

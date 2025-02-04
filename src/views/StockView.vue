@@ -1,6 +1,6 @@
 <template>
     <h1 class="intro m-auto my-6 text-center">Lager</h1>
-        <StockControls @addProduct="addNewProduct" @search="searchFilter" @filterChange="handleFilterChange" :addProductActivated="addProductActivated"/>
+        <StockControls @buttonClick="addNewProduct" @search="searchFilter" @filterChange="handleFilterChange" :isActive="addProductActivated"/>
     <div class="wrap relative">
         <div class="overlay" v-if="addProductActivated">
             <ProductForm @closeAdd="closeAdd"/>
@@ -13,10 +13,10 @@
 </template>
 
 <script setup>
-import StockControls from "../components/StockControls.vue";
-import ProductsTable from "../components/ProductsTable.vue";
-import ProductForm from "../components/ProductForm.vue";
-import EditProduct from "../components/EditProduct.vue";
+import StockControls from "../components/stock/StockControls.vue";
+import ProductsTable from "../components/stock/ProductsTable.vue";
+import ProductForm from "../components/stock/ProductForm.vue";
+import EditProduct from "../components/stock/EditProduct.vue";
 import { ref, watch } from "vue";
 
 
@@ -75,13 +75,5 @@ watch([addProductActivated, editProductActivated], (newValues) => {
 </script>
 
 <style lang="scss" scoped>
-.overlay {
-    width: 100%; 
-    height: 100%; 
-    background-color: rgba(0, 0, 0, 0.5);
-    position: absolute; 
-    display: flex; 
-    justify-content: center; 
-    align-items: center;
-}
+@use "../assets/scss/forms" as f;
 </style>

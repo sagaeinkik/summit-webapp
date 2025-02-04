@@ -1,6 +1,6 @@
 <template>
     <button class="bg-mediumdark font-semibold text-light px-6 py-1 hover:bg-medium" @click="handleClick">
-       <span :class="addProductActivated ? 'close' : 'open'">&#10540;</span>
+       <span :class="isActive ? 'close' : 'open'">&#10540;</span>
     </button>
 </template>
 
@@ -8,15 +8,15 @@
 import { ref } from "vue";
 
 //Emit
-const emit = defineEmits(["addToTable"]);
+const emit = defineEmits(["buttonClick"]);
 const handleClick = (event) => {
-    emit("addToTable");
+    emit("buttonClick");
     open.value = !open.value;
 }
 
 //Props från StockView via StockControls: boolean som styr om knappen ska visa plus eller kryss
 const props = defineProps({
-    addProductActivated: Boolean
+    isActive: Boolean
 })
 </script>
 

@@ -31,3 +31,30 @@ i {
 tr:nth-child(even) {
     background-color: white;
 }
+
+//Runt hela tabellen
+.table-wrapper {
+    overflow: auto;
+    height: calc(100vh - 375px);
+}
+
+//Minska tabellens kolumner, klipp av med punkter
+@media (max-width: 1500px) {
+    td {
+        max-width: 100px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+}
+
+//Minska textstorlekar
+@media (max-width: 1200px) {
+    th {
+        font-size: 0.9em;
+    }
+
+    td {
+        font-size: 0.85em;
+    }
+}

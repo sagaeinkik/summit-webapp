@@ -92,7 +92,7 @@
 
 <script setup>
 import { onMounted, ref } from 'vue';
-import { getCookie } from "../utils/auth";
+import { getCookie } from "../../utils/auth";
 
 //Hämta token från cookie
 const userToken = getCookie("jwt");
@@ -299,8 +299,8 @@ async function deleteProduct(product) {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/scss/vars" as v;
-@use "../assets/scss/forms" as f;
+@use "../../assets/scss/vars" as v;
+@use "../../assets/scss/forms" as f;
 
 .form-wrapper {
     width: 70%;

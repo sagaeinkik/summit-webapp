@@ -9,7 +9,7 @@
 
 <script setup>
 import { ref, onMounted } from 'vue';
-import DashboardCard from './DashboardCard.vue';
+import DashboardCard from "./DashboardCard.vue";
 
 let productCount = ref(0); 
 let supplierCount = ref(0); 

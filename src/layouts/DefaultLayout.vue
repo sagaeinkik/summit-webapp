@@ -59,7 +59,18 @@ main {
     //Bredda, minska padding
     main {
         width: 100%;
-        padding: 1em;
+        padding: 1.2em;
+    }
+
+    .nav-cont {
+        width: 17%;
+    }
+}
+
+@media (max-width: 1290px) {
+
+    .nav-cont {
+        width: 14%;
     }
 }
 

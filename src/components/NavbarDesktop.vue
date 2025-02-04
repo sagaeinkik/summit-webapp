@@ -110,6 +110,7 @@ nav ul {
     }
 }
 
+
 //Media queries för tablet-storlekar
 @media (max-width: 1290px) {
     nav ul {

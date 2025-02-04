@@ -1,15 +1,15 @@
 <template>
 <div class="ctrl-grid-wrap grid gap-8 items-end">
-    <AddButton id="add" @addToTable="handleAddProduct" :addProductActivated="addProductActivated"/>
-    <SearchBar id="searchbar" @search="handleSearchFilter"/>
+    <AddButton id="add" @buttonClick="handleAddProduct" :isActive="isActive"/>
+    <SearchBar id="searchbar" :placeholder="'Sök produkt'" @search="handleSearchFilter"/>
     <SelectList id="select" name="product-filter" :options="productFilterOptions" @filterChange="handleFilterChange" class="justify-self-end"/>
 </div>
 </template>
 
 <script setup>
-import AddButton from "./AddButton.vue"
-import SearchBar from "./SearchBar.vue"
-import SelectList from "./SelectList.vue"
+import AddButton from "../AddButton.vue"
+import SearchBar from "../SearchBar.vue"
+import SelectList from "../SelectList.vue"
 
 //Listan med options 
 const productFilterOptions = [
@@ -23,15 +23,15 @@ const productFilterOptions = [
 
 //Ta emot props från StockView: 
 const props = defineProps({
-    addProductActivated: Boolean
+    isActive: Boolean
 })
 
 /* Emitta alla vidare till Stockview */
-const emit = defineEmits(["addProduct", "search", "filterChange"]);
+const emit = defineEmits(["buttonClick", "search", "filterChange"]);
 
 
 const handleAddProduct = () => {
-    emit("addProduct");
+    emit("buttonClick");
 }
 
 const handleSearchFilter = (searchValue) => {
@@ -44,7 +44,7 @@ const handleFilterChange = (selectedValue) => {
 </script>
 
 <style lang="scss" scoped>
-@use "../assets/scss/vars" as v;
+@use "../../assets/scss/vars" as v;
 
 .ctrl-grid-wrap {
     grid-template-columns: 1fr 2fr 1fr;
