@@ -8,20 +8,21 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { ref, onMounted } from 'vue';
 import DashboardCard from "./DashboardCard.vue";
 
+/* ------------ Variabler ------------ */
 let productCount = ref(0); 
 let supplierCount = ref(0); 
 let categoryCount = ref(0);
 
 let apiUrl = "https://summitapi.up.railway.app"; 
 
-onMounted(() => {
-    fetchProducts(); 
-    fetchSuppliers(); 
-    fetchCategories();
-}); 
+/* ------ Props, emits, expose ------- */
+
+
+/* ------------ Funktioner ----------- */
 
 //Hämta produkter
 async function fetchProducts() {
@@ -55,6 +56,16 @@ async function fetchCategories() {
         console.error(error);
     }
 }
+
+/* -------- Watch, onMounted --------- */
+
+onMounted(() => {
+    fetchProducts(); 
+    fetchSuppliers(); 
+    fetchCategories();
+}); 
+
+
 </script>
 
 <style lang="scss" scoped>

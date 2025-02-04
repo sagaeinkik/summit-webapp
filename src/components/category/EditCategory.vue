@@ -29,11 +29,12 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { onMounted, ref } from 'vue';
 import { getCookie } from "../../utils/auth";
-/* ---------------------------------------- */
-//Variabler
-const errors = ref(""); //Eventuella errorm
+
+/* ------------ Variabler ------------ */
+const errors = ref(""); //Eventuella error
 const successMsg = ref(""); //Succémeddelande
 const formData = ref({
     category_name: ""
@@ -43,22 +44,13 @@ const showForm = ref(true); //Visa formulär
 const userToken = getCookie("jwt"); //Token
 let apiUrl = "https://summitapi.up.railway.app"; 
 
-//Props
+/* ------ Props, emits, expose ------- */
 const props = defineProps({
     editCategory: {
         type: Object, 
         required: true
     }
 })
-
-/* ----------------------------------------- */
-
-onMounted(() => {
-    //Fyll i formuläret med kategorinamn
-    formData.value.category_name = props.editCategory.category_name;
-})
-
-
 
 //Emits
 const emit = defineEmits(["closeEdit"]);
@@ -87,6 +79,7 @@ const handleSubmit = () => {
     updateCategory(editedCategory);
 }
 
+/* ------------ Funktioner ----------- */
 
 //Fetchanrop PUT
 async function updateCategory(category) {
@@ -156,6 +149,13 @@ async function handleDelete(category) {
         errors.value = "Något gick fel vid radering av kategori!";
     }
 }
+
+/* -------- Watch, onMounted --------- */
+
+onMounted(() => {
+    //Fyll i formuläret med kategorinamn
+    formData.value.category_name = props.editCategory.category_name;
+})
 
 </script>
 

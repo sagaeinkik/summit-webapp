@@ -14,26 +14,35 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { ref, onMounted } from "vue"; 
 import { RouterView } from 'vue-router'
 import Banner from "../components/Banner.vue";
 import NavbarDesktop from '../components/NavbarDesktop.vue';
 import NavbarMobile from "../components/NavbarMobile.vue";
 
+/* ------------ Variabler ------------ */
 //Reaktiv variabel för skärmbredd
 const isDesktop = ref(true); 
 
+/* ------ Props, emits, expose ------- */
+
+
+/* ------------ Funktioner ----------- */
 //Funktion som uppdaterar ovan variabel
 const updateScreenSize = () => {
     isDesktop.value = window.innerWidth > 550; 
 }
 
+
+/* -------- Watch, onMounted --------- */
 onMounted(() => {
     //Kör funktion en gång direkt
     updateScreenSize(); 
     //Eventlyssnare som läggs till direkt när sidan laddas
     window.addEventListener("resize", updateScreenSize);
 })
+
 </script>
 
 

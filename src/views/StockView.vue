@@ -13,6 +13,7 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import StockControls from "../components/stock/StockControls.vue";
 import ProductsTable from "../components/stock/ProductsTable.vue";
 import ProductForm from "../components/stock/ProductForm.vue";
@@ -20,6 +21,7 @@ import EditProduct from "../components/stock/EditProduct.vue";
 import { ref, watch } from "vue";
 
 
+/* ------------ Variabler ------------ */
 //Reaktiva variabler
 let searchString = ref(""); //För sökning
 let selectedFilter = ref("product_id"); //Select-lista
@@ -29,7 +31,9 @@ let selectedProduct = ref(null); //Vald produkt för redigering
 let productsTable = ref(null); //Referens till ProductsTable för att komma åt metoden fetchProducts
 
 
-//Lagra om AddProduct är aktiverad, byt värde för varje knappklick
+/* ------ Props, emits, expose ------- */
+
+//Om Add-knapp är klickad på, byt värde för varje klick
 const addNewProduct = () => {
     addProductActivated.value = !addProductActivated.value;
 }
@@ -59,6 +63,10 @@ const searchFilter = (searchValue) => {
 const handleFilterChange = (selectedValue) => {
     selectedFilter.value = selectedValue;
 }
+/* ------------ Funktioner ----------- */
+
+
+/* -------- Watch, onMounted --------- */
 
 //watcher för att hämta tabellen igen baserat på om formulären har stängts
 watch([addProductActivated, editProductActivated], (newValues) => {

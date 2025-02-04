@@ -13,19 +13,23 @@
 </template>
 
 <script setup>
-import AddCategoryVue from "@/components/category/AddCategory.vue";
+/* ------------ Importer ------------- */
 import { ref, onMounted, watch } from "vue";
+import AddCategoryVue from "@/components/category/AddCategory.vue";
 import CategoryControls from "../components/category/CategoryControls.vue";
 import CategoryTable from "../components/category/CategoryTable.vue";
 import AddCategory from "../components/category/AddCategory.vue";
 import EditCategory from "../components/category/EditCategory.vue";
-//Variabler
+
+/* ------------ Variabler ------------ */
+
 const searchString = ref(""); //Söksträng från searchbar
 const addCategoryActivated = ref(false); //Om addCategory-formuläret ska visas
 const editCategoryActivated = ref(false); //Om editCategory-formuläret ska visas
 const selectedCategory = ref(null); //Vald kategori för redigering
 const categoryTable = ref(null); //Referens till CategoryTable för att komma åt metoden getCategories
 
+/* ------ Props, emits, expose ------- */
 
 //Lagra söksträng från emit
 const searchFilter = (searchValue) => {
@@ -52,6 +56,10 @@ const closeAdd = () => {
 const closeEdit = () => {
     editCategoryActivated.value = false;
 }
+/* ------------ Funktioner ----------- */
+
+
+/* -------- Watch, onMounted --------- */
 
 //Watcher för att uppdatera kategorier
 watch([addCategoryActivated, editCategoryActivated], (newValues) => {
@@ -64,6 +72,7 @@ watch([addCategoryActivated, editCategoryActivated], (newValues) => {
         categoryTable.value.getCategories();
     }
 })
+
 </script>
 
 

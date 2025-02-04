@@ -91,13 +91,16 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { onMounted, ref } from 'vue';
 import { getCookie } from "../../utils/auth";
 
+/* ------------ Variabler ------------ */
 //Hämta token från cookie
 const userToken = getCookie("jwt");
 
-
+//Api
+let apiUrl = "https://summitapi.up.railway.app";
 
 //Reaktiva variabler
 const suppliers = ref([]); //Leverantörslista
@@ -117,6 +120,7 @@ const formData = ref({
 }); //Reaktivt formulär
 const showForm = ref(true); //Visa formuläret
 
+/* ------ Props, emits, expose ------- */
 
 //Ta emot produkt från StockView 
 const props = defineProps({
@@ -126,8 +130,15 @@ const props = defineProps({
     }
 })
 
-//Api
-let apiUrl = "https://summitapi.up.railway.app";
+//Emit för att stänga edit-formuläret.
+const emit = defineEmits(["closeEdit"]);
+const handleClick = (event) => {
+    emit("closeEdit");
+}
+const handleDelete = (product) => {
+    deleteProduct(product); 
+}
+/* ------------ Funktioner ----------- */
 
 //Fetchanrop till leverantörer och kategorier
 async function fetchSuppliers() {
@@ -149,44 +160,6 @@ async function fetchCategories() {
     }
 }
 
-onMounted(async () => {
-    // Vänta på att båda fetch-anropen är klara
-    await Promise.all([fetchSuppliers(), fetchCategories()]);
-    
-    //Matcha supplier-name med supplier-id
-    const matchedSupplier = suppliers.value.find(
-        s => s.company_name === props.product.supplier_name
-    );
-    
-    //Samma sak med kategori
-    const matchedCategory = categories.value.find(
-        c => c.category_name === props.product.category_name
-    );
-
-    //Fyll i formuläret med produktens data (och matchad leverantör/kategori)
-    formData.value = {
-        product_id: props.product.product_id,
-        product_name: props.product.product_name,
-        size: props.product.size || '',
-        extra: props.product.extra || '',
-        amount: props.product.amount,
-        in_price: props.product.in_price,
-        out_price: props.product.out_price,
-        supplier_id: matchedSupplier?.id,
-        category_id: matchedCategory?.id
-    }
-});
-
-//Emit för att stänga edit-formuläret.
-const emit = defineEmits(["closeEdit"]);
-const handleClick = (event) => {
-    emit("closeEdit");
-}
-const handleDelete = (product) => {
-    deleteProduct(product); 
-}
-
-/* UPPDATERA */
 //Kontrollera input (finns även i backend)
 function validateInput() {
     //Töm errors först
@@ -242,6 +215,7 @@ function handleSubmit() {
     updateProduct(productToUpdate);
 }
 
+/* UPPDATERA */
 async function updateProduct(product) {
     try {
 
@@ -295,6 +269,35 @@ async function deleteProduct(product) {
         console.error(error);
     }
 }
+/* -------- Watch, onMounted --------- */
+
+onMounted(async () => {
+    // Vänta på att båda fetch-anropen är klara
+    await Promise.all([fetchSuppliers(), fetchCategories()]);
+    
+    //Matcha supplier-name med supplier-id
+    const matchedSupplier = suppliers.value.find(
+        s => s.company_name === props.product.supplier_name
+    );
+    
+    //Samma sak med kategori
+    const matchedCategory = categories.value.find(
+        c => c.category_name === props.product.category_name
+    );
+
+    //Fyll i formuläret med produktens data (och matchad leverantör/kategori)
+    formData.value = {
+        product_id: props.product.product_id,
+        product_name: props.product.product_name,
+        size: props.product.size || '',
+        extra: props.product.extra || '',
+        amount: props.product.amount,
+        in_price: props.product.in_price,
+        out_price: props.product.out_price,
+        supplier_id: matchedSupplier?.id,
+        category_id: matchedCategory?.id
+    }
+});
 
 </script>
 

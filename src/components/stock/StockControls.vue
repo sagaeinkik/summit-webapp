@@ -7,9 +7,13 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import AddButton from "../AddButton.vue"
 import SearchBar from "../SearchBar.vue"
 import SelectList from "../SelectList.vue"
+
+
+/* ------------ Variabler ------------ */
 
 //Listan med options 
 const productFilterOptions = [
@@ -20,6 +24,8 @@ const productFilterOptions = [
     { value: "size", label: "Storlek"}, 
     { value: "extra", label: "Extra"}
 ]; 
+
+/* ------ Props, emits, expose ------- */
 
 //Ta emot props från StockView: 
 const props = defineProps({
@@ -41,41 +47,14 @@ const handleSearchFilter = (searchValue) => {
 const handleFilterChange = (selectedValue) => {
     emit("filterChange", selectedValue);
 }
+
+/* ------------ Funktioner ----------- */
+
+
+/* -------- Watch, onMounted --------- */
+
 </script>
 
 <style lang="scss" scoped>
-@use "../../assets/scss/vars" as v;
-
-.ctrl-grid-wrap {
-    grid-template-columns: 1fr 2fr 1fr;
-}
-
-@media (max-width: 800px) {
-    .ctrl-grid-wrap {
-        gap: 1em;
-
-    }
-}
-
-@media (max-width: 600px) {
-    .ctrl-grid-wrap {
-        grid-template-areas: "add select select" "searchbar searchbar searchbar"; 
-
-        //Knapp
-        #add {
-            grid-area: add;
-        }
-
-        //lista
-        #select {
-            grid-area: select;
-        }
-
-        //sökfält
-        #searchbar {
-            grid-area: searchbar;
-        }
-
-    }
-}
+@use "../../assets/scss/forms";
 </style>

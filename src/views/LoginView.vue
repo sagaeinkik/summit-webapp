@@ -20,10 +20,12 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { RouterLink, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { cookieCreator } from '../utils/auth';
 
+/* ------------ Variabler ------------ */
 //Router
 const router = useRouter();
 
@@ -33,6 +35,12 @@ const password = ref("");
 
 const loginInProgress = ref(false); 
 const errorMessage = ref(""); // Lagra felmeddelanden
+
+
+/* ------ Props, emits, expose ------- */
+
+
+/* ------------ Funktioner ----------- */
 
 //Validera input
 const validateInput = () => {
@@ -97,6 +105,9 @@ async function login() {
     }
 
 }
+
+/* -------- Watch, onMounted --------- */
+
 </script>
 
 <style lang="scss" scoped>

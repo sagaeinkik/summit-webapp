@@ -87,9 +87,11 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { onMounted, ref } from 'vue';
 import { getCookie } from "../../utils/auth";
 
+/* ------------ Variabler ------------ */
 
 //Reaktiva variabler
 const suppliers = ref([]);
@@ -113,6 +115,15 @@ const productToAdd = ref({
 //Api
 let apiUrl = "https://summitapi.up.railway.app";
 
+/* ------ Props, emits, expose ------- */
+
+//Emit
+const emit = defineEmits(["closeAdd"]);
+const handleClick = (event) => {
+    emit("closeAdd");
+}
+/* ------------ Funktioner ----------- */
+
 //Fetchanrop till leverantörer och kategorier
 async function fetchSuppliers() {
     try {
@@ -133,16 +144,6 @@ async function fetchCategories() {
     }
 }
 
-onMounted(() => {
-    fetchSuppliers();
-    fetchCategories();
-});
-
-//Emit
-const emit = defineEmits(["closeAdd"]);
-const handleClick = (event) => {
-    emit("closeAdd");
-}
 
 /* LÄGG TILL */
 //Kontrollera input (finns även i backend)
@@ -226,7 +227,11 @@ async function addProduct() {
     }
 
 }
-
+/* -------- Watch, onMounted --------- */
+onMounted(() => {
+    fetchSuppliers();
+    fetchCategories();
+});
 
 </script>
 

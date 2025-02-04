@@ -24,17 +24,22 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { ref, onMounted, watch, defineExpose } from "vue"; 
 import { sortArray } from "../../utils/sort";
 
-//Api
-let apiUrl = "https://summitapi.up.railway.app/categories";
-//Initiera lite arrayer
+
+/* ------------ Variabler ------------ */
+let apiUrl = "https://summitapi.up.railway.app/categories"; //Api
+
+//Arrayer
 const allCategories = ref([]);
 let filteredCategories = ref([]);
 
 //Variabel för att hålla koll på sortering
 let latestSort = ref(null); 
+
+/* ------ Props, emits, expose ------- */
 
 //Ta emot props
 const props = defineProps({
@@ -43,49 +48,6 @@ const props = defineProps({
         required: false,
         default: ""
     }
-});
-
-onMounted(() => {
-    getCategories();
-});
-
-//Hämta kategorier
-async function getCategories() {
-    try {
-        const response = await fetch(apiUrl);
-
-        //Lagra data i både alLCategories och filteredCategories
-        allCategories.value = await response.json();
-        filteredCategories.value = allCategories.value;
-    } catch (error) {
-        console.error(error);
-    }
-}
-
-//Sorteringar!
-function sortCategories(sortBy) {
-    //Använd sorteringsfunktion från utils/sort
-    filteredCategories.value = sortArray(filteredCategories.value, sortBy, latestSort);
-}
-
-//Sökning
-function filterCategories() {
-    if(props.search === "") {
-        filteredCategories.value = allCategories.value; //He tillbaka till hela listan om söksträngen är tom
-        return; 
-    }
-
-    //Filtrera 
-    filteredCategories.value = allCategories.value.filter(category => {
-        const searchValue = props.search.toLowerCase(); 
-        const fieldValue = String(category.category_name).toLowerCase(); 
-        return fieldValue.includes(searchValue);
-    })
-}
-
-//Watcher för sökning
-watch(() => props.search, () => {
-    filterCategories();
 });
 
 //Klick på redigeraikon
@@ -98,9 +60,55 @@ const handleClick = (category) => {
 defineExpose({
     getCategories
 });
+
+/* ------------ Funktioner ----------- */
+
+//Hämta kategorier
+async function getCategories() {
+    try {
+        const response = await fetch(apiUrl);
+    
+        //Lagra data i både alLCategories och filteredCategories
+        allCategories.value = await response.json();
+        filteredCategories.value = allCategories.value;
+    } catch (error) {
+        console.error(error);
+    }
+}
+    
+//Sorteringar!
+function sortCategories(sortBy) {
+    //Använd sorteringsfunktion från utils/sort
+    filteredCategories.value = sortArray(filteredCategories.value, sortBy, latestSort);
+}
+    
+    //Sökning
+function filterCategories() {
+    if(props.search === "") {
+        filteredCategories.value = allCategories.value; //He tillbaka till hela listan om söksträngen är tom
+        return; 
+    }
+    
+    //Filtrera 
+    filteredCategories.value = allCategories.value.filter(category => {
+        const searchValue = props.search.toLowerCase(); 
+        const fieldValue = String(category.category_name).toLowerCase(); 
+        return fieldValue.includes(searchValue);
+    })
+}
+
+/* -------- Watch, onMounted --------- */
+onMounted(() => {
+    getCategories();
+});
+
+
+//Watcher för sökning
+watch(() => props.search, () => {
+    filterCategories();
+});
 </script>
 
 <style lang="scss" scoped>
-@use "../../assets/scss/vars" as v;
 @use "../../assets/scss/tables" as t;
 </style>

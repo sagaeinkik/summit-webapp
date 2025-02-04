@@ -23,8 +23,10 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { ref, onMounted} from 'vue';
 
+/* ------------ Variabler ------------ */
 const latestLogs = ref([]);
 const apiUrl = "https://summitapi.up.railway.app";
 
@@ -70,6 +72,11 @@ const fieldDefinitions = {
     ]
 }
 
+/* ------ Props, emits, expose ------- */
+
+
+/* ------------ Funktioner ----------- */
+
 //Hämta labels
 const getTableLabel = (table) => tableLabels[table] || table;
 const getActionLabel = (action) => actionLabels[action] || action;
@@ -90,11 +97,6 @@ const formatValue = (key, value) => {
     return value; 
 }
 
-
-onMounted(() => {
-    fetchLogs();
-});
-
 //Hämtar loggar
 async function fetchLogs() {
     try {
@@ -108,6 +110,11 @@ async function fetchLogs() {
         console.error(error);
     }
 }
+/* -------- Watch, onMounted --------- */
+
+onMounted(() => {
+    fetchLogs();
+});
 
 </script>
 

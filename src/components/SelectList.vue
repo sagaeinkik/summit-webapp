@@ -20,12 +20,12 @@ defineProps({
     }
 })
 
-
 //Gör ny emit med hjälp av handleChange från select-listan
 const emit = defineEmits(['filterChange']);
 const handleChange = (event) => {
     emit('filterChange', event.target.value);
 }
+
 </script>
 
 <style lang="scss" scoped>

@@ -25,8 +25,11 @@
 
 
 <script setup>
+/* ------------ Importer ------------- */
 import { onMounted, ref } from 'vue';
 import { getCookie } from "../../utils/auth";
+
+/* ------------ Variabler ------------ */
 
 const userToken = getCookie("jwt");
 
@@ -37,6 +40,15 @@ const categoryToAdd = ref({
     categoryName: ""
 });
 
+/* ------ Props, emits, expose ------- */
+
+//Stäng formulär
+const emit = defineEmits(["closeAdd"]);
+const handleClick = () => {
+    emit("closeAdd");
+}
+
+/* ------------ Funktioner ----------- */
 
 //Lägg till kategori
 const addCategory = async () => {
@@ -79,11 +91,8 @@ const addCategory = async () => {
     }
 }
 
-//Stäng formulär
-const emit = defineEmits(["closeAdd"]);
-const handleClick = () => {
-    emit("closeAdd");
-}
+/* -------- Watch, onMounted --------- */
+
 </script>
 
 <style lang="scss" scoped>

@@ -37,9 +37,11 @@
 </template>
 
 <script setup>
+/* ------------ Importer ------------- */
 import { ref, onMounted, watch, defineExpose } from "vue"; 
 import { sortArray } from "../../utils/sort";
 
+/* ------------ Variabler ------------ */
 
 //Initiera lite arrayer
 const allProducts = ref([]);
@@ -47,6 +49,8 @@ let filteredProducts = ref([]);
 
 //Variabel för att hålla koll på sortering
 let latestSort = ref(null); 
+
+/* ------ Props, emits, expose ------- */
 
 //Props från StockView
 const props = defineProps({
@@ -62,16 +66,18 @@ const props = defineProps({
     }
 }); 
 
-onMounted(() => {
-    fetchProducts();
-    filterProducts();
-})
-
 //Emits
 const emit = defineEmits(["editProduct"]);
 const handleClick = (product) => {
     emit("editProduct", product);
 }
+
+//Exponera fetch-anropet så man kan uppdatera från StockView
+defineExpose({
+    fetchProducts
+});
+
+/* ------------ Funktioner ----------- */
 
 async function fetchProducts() {
     try {
@@ -98,22 +104,24 @@ function filterProducts() {
     })
 }
 
-//Gör en watch för sök och filter
-watch([() => props.search, () => props.filter], () => {
-    filterProducts(); 
-})
-
-
 //Sortera produkter vid klick
 function sortProducts(sortBy) {
     //Använd sorteringsfunktion från utils/sort
     filteredProducts.value = sortArray(filteredProducts.value, sortBy, latestSort);
 }
 
-//Exponera fetch-anropet så man kan uppdatera från StockView
-defineExpose({
-    fetchProducts
-});
+/* -------- Watch, onMounted --------- */
+
+onMounted(() => {
+    fetchProducts();
+    filterProducts();
+})
+
+//Gör en watch för sök och filter
+watch([() => props.search, () => props.filter], () => {
+    filterProducts(); 
+})
+
 </script>
 
 <style lang="scss" scoped>
