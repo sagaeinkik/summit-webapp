@@ -15,12 +15,13 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router"; 
 import { useUserStore } from "../stores/userStore";
+import { onMounted } from "vue";
 
 const router = useRouter();
 const userStore = useUserStore();
-
 //Hämta användarnamn från userStore
-const username = userStore.username;
+let username = userStore.username;
+
 
 //Radera cookie, rensa storage, skicka till login
 function logout() {
@@ -28,6 +29,11 @@ function logout() {
     sessionStorage.clear(); 
     router.push("/login");
 }
+
+onMounted(() => {
+    //Hämta användarnamn från userStore redan vid inladdning
+    username = userStore.username;
+})
 </script>
 
 

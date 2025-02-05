@@ -60,7 +60,6 @@ async function onSubmit() {
         registerInProgress.value = false; 
         return; 
     }
-    console.log('Form submitted');
 
     await signup(); 
 }
