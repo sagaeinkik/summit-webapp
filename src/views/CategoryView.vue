@@ -1,7 +1,7 @@
 <template>
     <h1 class="intro m-auto my-6 text-center">Kategorier</h1>
         <CategoryControls @search="searchFilter" @buttonClick="addCategory" :isActive="addCategoryActivated"/>
-        <div class="wrap relative">
+        <div class="relative">
             <div class="overlay" v-if="addCategoryActivated">
                 <AddCategory @closeAdd="closeAdd"/>
             </div>

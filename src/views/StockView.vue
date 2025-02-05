@@ -1,7 +1,7 @@
 <template>
     <h1 class="intro m-auto my-6 text-center">Lager</h1>
         <StockControls @buttonClick="addNewProduct" @search="searchFilter" @filterChange="handleFilterChange" :isActive="addProductActivated"/>
-    <div class="wrap relative">
+    <div class="relative">
         <div class="overlay" v-if="addProductActivated">
             <ProductForm @closeAdd="closeAdd"/>
         </div>
@@ -16,7 +16,7 @@
 /* ------------ Importer ------------- */
 import StockControls from "../components/stock/StockControls.vue";
 import ProductsTable from "../components/stock/ProductsTable.vue";
-import ProductForm from "../components/stock/ProductForm.vue";
+import ProductForm from "../components/stock/AddProduct.vue";
 import EditProduct from "../components/stock/EditProduct.vue";
 import { ref, watch } from "vue";
 

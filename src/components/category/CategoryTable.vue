@@ -12,7 +12,7 @@
 
         <tbody v-if="filteredCategories.length > 0">
             <!-- Loopa igenom alla produkter: lägg på en dubbelklick på varje rad -->
-            <tr v-for="category in filteredCategories" :key="category.id" @dblclick="() => handleClick(category)" class="cursor-pointer">
+            <tr class="cursor-pointer" v-for="category in filteredCategories" :key="category.id" @dblclick="() => handleClick(category)">
                 <td :title="category.id">{{ category.id }}</td>
                 <td :title="category.category_name">{{ category.category_name }}</td>
                 <!-- Redigera-ikon: skicka med kategori med emit -->

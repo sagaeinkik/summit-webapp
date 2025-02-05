@@ -4,8 +4,8 @@
             <h2 class="text-center">Registrera ny kategori</h2>
             <button class="absolute close" @click="handleClick">&#10540;</button>
         </div>
-    <p v-if="errors" class="text-red-600 font-medium ml-3">{{ errors }}</p>
-    <p v-if="successMsg">{{ successMsg }}</p>
+    <p v-if="errors" class="text-red-600 ml-3">{{ errors }}</p>
+    <p v-if="successMsg" class="ml-3">{{ successMsg }}</p>
     <form @submit.prevent class="overlay-form mt-4">
 
         <!-- Namn-->
@@ -59,6 +59,9 @@ const addCategory = async () => {
 
     //Nollställ felmeddelanden
     errors.value = ""; 
+    //Nollställ succé
+    successMsg.value = "";
+    
     try {
         const response = await fetch("https://summitapi.up.railway.app/categories", {
             method: "POST",

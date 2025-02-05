@@ -2,7 +2,7 @@
     <h1 class="intro m-auto my-6 text-center">Leverantörer</h1>
     <SupplierControls :isActive="addSupplierActivated" @buttonClick="addSupplier" @search="searchFilter" @filterChange="handleFilterChange"/>
     
-    <div class="wrap relative">
+    <div class="relative">
 
         <div class="overlay" v-if="addSupplierActivated">
             <AddSupplier @closeAdd="closeAdd"/>

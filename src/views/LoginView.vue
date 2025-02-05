@@ -91,8 +91,9 @@ async function login() {
         if (data.message === "Inloggning lyckades") {
             // Skapa cookie
             cookieCreator(data);
-            // Lagra användarnamn
+            // Lagra användarnamn och ID
             sessionStorage.setItem("username", data.loggedInUser.username);  
+            sessionStorage.setItem("userID", data.loggedInUser.id);
             // Skicka användaren till startsidan
             router.push("/")
         }

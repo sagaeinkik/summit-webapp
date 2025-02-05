@@ -1,14 +1,14 @@
 <template>
         <div class="bg-light p-4 absolute rounded-3xl form-wrapper">
         <div class="headline relative">
-            <h2 class="text-center">Ändra leverantör</h2>
+            <h2 class="text-center">Ändra leverantör {{ props.editSupplier.company_name }} </h2>
             <button class="absolute close" @click="handleClick">&#10540;</button>
         </div>
 
-        <p v-if="errors" class="text-red-600 font-medium ml-3">{{ errors }}</p>
-        <p v-if="successMsg">{{ successMsg }}</p>
+        <p v-if="errors" class="text-red-600 ml-3">{{ errors }}</p>
+        <p v-if="successMsg" class="ml-3">{{ successMsg }}</p>
 
-        <p v-if="!showForm">Stänger fönster...</p>
+        <p v-if="!showForm" class="ml-3">Stänger fönster...</p>
         <form v-if="showForm" @submit.prevent class="overlay-form mt-4">
 
             <!-- Namn-->

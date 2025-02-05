@@ -86,8 +86,10 @@ async function signup() {
 
             //Skapa cookie
             cookieCreator(data);
-            // Lagra användarnamn
-            sessionStorage.setItem("username", data.newUser.username);  
+            // Lagra användarnamn och ID
+            sessionStorage.setItem("username", data.newUser.username); 
+            sessionStorage.setItem("userID", data.newUser.id);
+             
             //Omdirigera till dashboard
             router.push('/');
         } else {

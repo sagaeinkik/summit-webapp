@@ -10,6 +10,11 @@ th {
     font-weight: 400;
     font-size: 1.1em;
     padding: 0.5em 1em;
+    cursor: pointer;
+
+    &:hover {
+        background-color: v.$mediumdark;
+    }
 }
 
 td {

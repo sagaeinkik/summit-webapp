@@ -4,8 +4,8 @@
             <h2 class="text-center">Registrera ny produkt</h2>
             <button class="absolute close" @click="handleClick">&#10540;</button>
         </div>
-    <p v-if="errors" class="text-red-600 font-medium ml-3">{{ errors }}</p>
-    <p v-if="successMsg">{{ successMsg }}</p>
+    <p v-if="errors" class="text-red-600 ml-3">{{ errors }}</p>
+    <p v-if="successMsg" class="ml-3">{{ successMsg }}</p>
     <form @submit.prevent class="overlay-form mt-4">
 
         <!-- Grupp -->
@@ -187,6 +187,7 @@ async function addProduct() {
         return;
     }
     errors.value = ""; 
+    successMsg.value = "";
 
     //Gör en trycatch
     try {

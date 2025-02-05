@@ -21,8 +21,8 @@
                 <tr v-for="supplier in filteredSuppliers" :key="supplier.id" @dblclick="() => handleClick(supplier)" class="cursor-pointer">
                     <td :title="supplier.id">{{ supplier.id }}</td>
                     <td :title="supplier.company_name">{{ supplier.company_name }}</td>
-                    <td :title="supplier.street_address">{{ supplier.street_address }}</td>
-                    <td :title="supplier.area">{{ supplier.area }}</td>
+                    <td :title="supplier.street_address">{{ supplier.street_address ? supplier.street_address : "-" }}</td>
+                    <td :title="supplier.area">{{ supplier.area ? supplier.area : "-" }}</td>
                     <td :title="supplier.telephone">{{ supplier.telephone }}</td>
                     <td :title="supplier.email">{{ supplier.email }}</td>
                     <!-- Redigera-ikon: skicka med kategori med emit -->

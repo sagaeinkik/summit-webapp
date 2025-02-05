@@ -14,10 +14,13 @@
 
 <script setup>
 import { RouterLink, useRouter } from "vue-router"; 
-const router = useRouter();
+import { useUserStore } from "../stores/userStore";
 
-//Hämta användarnamn 
-const username = sessionStorage.getItem("username");
+const router = useRouter();
+const userStore = useUserStore();
+
+//Hämta användarnamn från userStore
+const username = userStore.username;
 
 //Radera cookie, rensa storage, skicka till login
 function logout() {
