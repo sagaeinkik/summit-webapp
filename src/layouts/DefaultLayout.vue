@@ -110,13 +110,20 @@ main {
         width: 96%; 
         margin: auto;
         margin-top: 1em; 
-        height: calc(100vh - 15em);
+        height: calc(100dvh - 190px);
         max-height: 2000px;
 ;       overflow-y: auto;
         border-radius: 35px; 
         margin-bottom: 2em;
         position: relative; 
     }
+
+    /* @supports (-webkit-touch-callout: none) {
+    
+        main {
+            height: calc(100vh - 14em);
+        }
+    } */
 
     //Utrymme mellan main och navbar
     .nav-spacer {

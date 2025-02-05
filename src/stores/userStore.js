@@ -2,7 +2,11 @@
 import { ref, computed } from 'vue';
 
 //Hitta användarnamnet
-const username = ref(sessionStorage.getItem('username'));
+const username = ref('');
+
+if (sessionStorage.getItem('username')) {
+    username.value = sessionStorage.getItem('username');
+}
 
 export const useUserStore = () => {
     // Skapa en computed property som kommer reagera på ändringar

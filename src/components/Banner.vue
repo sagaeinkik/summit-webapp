@@ -4,6 +4,7 @@
             <img class="mt-3" src="../assets/images/summitlogo-white.svg" alt="Logotyp föreställande en björn">
         </RouterLink>
     <div class="logged-in text-white">
+        <!-- Fixa detta. -->
         <p><span>Inloggad som </span>{{ username }}</p>
     </div>
     <button @click="logout()" class="bg-mediumdark text-white px-8 py-3 rounded-3xl hover:bg-medium">
@@ -27,6 +28,7 @@ let username = userStore.username;
 function logout() {
     document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
     sessionStorage.clear(); 
+    userStore.updateUsername("");
     router.push("/login");
 }
 
