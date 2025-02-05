@@ -1,29 +1,43 @@
-# summit-webbapp
+# Summit Klient-applikation / Webbapplikation
 
-This template should help get you started developing with Vue 3 in Vite.
+av Saga Einarsdotter Kikajon
 
-## Recommended IDE Setup
+## Bakgrund
 
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
+Detta är ett UI framtaget för ett fiktivt företag som säljer vintersportprylar (Nordic Peak). Summit är namnet på själva applikationen som Nordic Peak använder sig av.
 
-## Customize configuration
+## Info
 
-See [Vite Configuration Reference](https://vite.dev/config/).
+Applikationen är skapad med vue. Den använder sig av ett API jag har byggt i Fastify för ändamålet, vars repo finns att hitta här: https://github.com/sagaeinkik/summitAPI
 
-## Project Setup
+Jag har stylat med Tailwind CSS och kompletterat med egen Scss.
 
-```sh
-npm install
+Utöver det har jag inte använt några andra dependencies förutom de som installeras automatiskt av Vite i Vue-projekt.
+
+### Bra att veta
+
+-   Det finns sortering i samtliga tabeller enligt fält i både stigande och fallande ordning.
+-   För att slippa scrolla hela vägen åt sidan på mindre skärmar kan man dubbelklicka på tabellraderna för att redigera ett objekt.
+-   Om man hovrar över tabelldata som har klippts av med punkter (...) ser man en tooltip med innehållet.
+-   Det saknas stöd för att bredda/minska tabellens fält.
+-   För produkter anger man även ProduktID, som ska motsvara streckkoder.
+
+## Användning
+
+Installera
+
+```
+npm run install
 ```
 
-### Compile and Hot-Reload for Development
+Starta applikation
 
-```sh
+```
 npm run dev
 ```
 
-### Compile and Minify for Production
+Kompilera
 
-```sh
+```
 npm run build
 ```
