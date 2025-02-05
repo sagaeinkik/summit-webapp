@@ -110,7 +110,7 @@ main {
         width: 96%; 
         margin: auto;
         margin-top: 1em; 
-        height: calc(100dvh - 170px);
+        height: calc(100dvh - 175px);
         max-height: 2000px;
 ;       overflow-y: auto;
         border-radius: 35px; 
