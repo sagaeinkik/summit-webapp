@@ -1,6 +1,6 @@
 <template>
     <div class="table-wrapper mt-10 block pb-4">
-        <p class="mb-4">Antal kategorier:  </p>
+        <p class="mb-4">Antal kategorier: {{ filteredSuppliers.length }} </p>
 
         <table class="w-full">
 

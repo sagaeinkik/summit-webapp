@@ -5,11 +5,11 @@
     <div class="wrap relative">
 
         <div class="overlay" v-if="addSupplierActivated">
-            <p>Här skriver jag saker</p>
+            <AddSupplier @closeAdd="closeAdd"/>
         </div>
 
         <div class="overlay" v-if="editSupplierActivated">
-            <p>Här skriver jag saker</p>
+            <EditSupplier :editSupplier="selectedSupplier" @closeEdit="closeEdit"/>
         </div>
         <SupplierTable ref="supplierTable" :search="searchString" :filter="selectedFilter" @handleClick="editSupplier"/>
     </div>
@@ -18,9 +18,11 @@
 
 <script setup>
 /* ------------ Importer ------------- */
-import { ref } from 'vue'
+import { ref, watch } from 'vue'
 import SupplierControls from "../components/supplier/SupplierControls.vue";
 import SupplierTable from "../components/supplier/SupplierTable.vue";
+import AddSupplier from "../components/supplier/AddSupplier.vue";
+import EditSupplier from "../components/supplier/EditSupplier.vue";
 
 /* ------------ Variabler ------------ */
 
@@ -42,6 +44,10 @@ const addSupplier = () => {
     addSupplierActivated.value = !addSupplierActivated.value;
 }
 
+const closeAdd = () => {
+    addSupplierActivated.value = false;
+}
+
 //Selectlista
 const handleFilterChange = (selectedValue) => {
     selectedFilter.value = selectedValue;
@@ -52,11 +58,26 @@ const editSupplier = (supplier) => {
     editSupplierActivated.value = !editSupplierActivated.value;
     selectedSupplier.value = supplier; 
 }
+
+const closeEdit = () => {
+    editSupplierActivated.value = false;
+}
+
 /* ------------ Funktioner ----------- */
 
 
 /* -------- Watch, onMounted --------- */
+//Watcher för att uppdatera leverantörslistan
+watch([addSupplierActivated, editSupplierActivated], (newValues) => {
+    //Nya värden för add och edit
+    const [newAddValue, newEditValue] = newValues;
 
+    //Om nya värdena är false (dvs formulären har stängts) och tabellen finns
+    if ((!newAddValue || !newEditValue) && supplierTable.value) {
+        
+        supplierTable.value.getSuppliers();
+    }
+})
 
 </script>
 
