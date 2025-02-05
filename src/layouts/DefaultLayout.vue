@@ -120,7 +120,7 @@ main {
 
     //Utrymme mellan main och navbar
     .nav-spacer {
-        height: 2em;
+        height: 10em;
     }
 }
 
