@@ -110,7 +110,7 @@ main {
         width: 96%; 
         margin: auto;
         margin-top: 1em; 
-        height: calc(100vh - 11em);
+        height: calc(100vh - 15em);
         max-height: 2000px;
 ;       overflow-y: auto;
         border-radius: 35px; 
@@ -120,7 +120,7 @@ main {
 
     //Utrymme mellan main och navbar
     .nav-spacer {
-        height: 10em;
+        height: 2em;
     }
 }
 

@@ -15,7 +15,7 @@
 <script setup>
 import { RouterLink, useRouter } from "vue-router"; 
 import { useUserStore } from "../stores/userStore";
-import { onMounted } from "vue";
+import { onMounted, ref } from "vue";
 
 const router = useRouter();
 const userStore = useUserStore();
@@ -32,7 +32,7 @@ function logout() {
 
 onMounted(() => {
     //Hämta användarnamn från userStore redan vid inladdning
-    username = userStore.username;
+    username.value = userStore.username;
 })
 </script>
 
