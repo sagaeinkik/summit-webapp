@@ -50,7 +50,15 @@ img {
     width: 10em; 
     position: absolute; 
     top: -1em;
-    left: 3em;
+    left: 2em;
+}
+
+//Specifikt för firefox
+@supports (-moz-appearance:none) {
+    img {
+        width: 7em; 
+        left: 0;
+    }
 }
 
 .logged-in {
@@ -62,6 +70,12 @@ img {
     img {
         width: 7em;
         left: 1em; 
+    }
+
+    @supports (-moz-appearance:none) {
+        img {
+            left: 0;; 
+        }
     }
 }
 
@@ -82,6 +96,8 @@ img {
     .logged-in {
         left: 0; 
     }
+
+    
 }
 
 @media (max-width: 550px) {

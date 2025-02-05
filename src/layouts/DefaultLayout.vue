@@ -83,6 +83,15 @@ main {
     }
 }
 
+@media (max-width: 750px) {
+    //För firefox
+    @supports (-moz-appearance:none) {
+        nav {
+            margin-left: 0; 
+        }   
+    }
+}
+
 @media (max-width: 670px) {
     .content-wrapper {
         margin-top: 1em;
@@ -101,7 +110,7 @@ main {
         width: 96%; 
         margin: auto;
         margin-top: 1em; 
-        height: calc(100vh - 170px);
+        height: calc(100vh - 11em);
         max-height: 2000px;
 ;       overflow-y: auto;
         border-radius: 35px; 

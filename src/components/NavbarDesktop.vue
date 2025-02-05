@@ -50,9 +50,15 @@ const isActive = (routePath) => {
 <style lang="scss" scoped>
 @use "../assets/scss/vars" as v; 
 
-
+//Specifikt för firefox: flytta in menyn lite
+@supports (-moz-appearance:none) {
+    nav {
+        margin-left: 1em;
+    }
+}
 nav ul {
     height: 60%; 
+    
 
     /* Jag lägger li- och a-regler här för jag vill inte upprepa klasserna på varje */
     li {
