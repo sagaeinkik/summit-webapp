@@ -80,7 +80,6 @@ async function signup() {
         });
 
         const data = await response.json();
-        console.log(data);
 
         if (response.ok) {
             //Logga in användare direkt: 
