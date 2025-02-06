@@ -80,6 +80,7 @@ async function signup() {
         });
 
         const data = await response.json();
+        console.log(data);
 
         if (response.ok) {
             //Logga in användare direkt: 
@@ -87,9 +88,9 @@ async function signup() {
             //Skapa cookie
             cookieCreator(data);
             // Lagra användarnamn och ID
-            sessionStorage.setItem("userID", data.loggedInUser.id);
+            sessionStorage.setItem("userID", data.newUser.id);
             const userStore = useUserStore();
-            userStore.updateUsername(data.loggedInUser.username);
+            userStore.updateUsername(data.newUser.username);
 
             //Nollställ scroll så mobilvyn inte hamnar fel
             window.scrollTo(0, 0);
