@@ -118,13 +118,6 @@ main {
         position: relative; 
     }
 
-    /* @supports (-webkit-touch-callout: none) {
-    
-        main {
-            height: calc(100vh - 14em);
-        }
-    } */
-
     //Utrymme mellan main och navbar
     .nav-spacer {
         height: 2em;

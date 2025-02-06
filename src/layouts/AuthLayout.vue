@@ -17,7 +17,7 @@ import { RouterView } from 'vue-router'
 
 .wrapper {
     width: 100%;
-    height: 100vh; 
+    height: 100dvh; 
     overflow: hidden;
     gap: 5em;
 
