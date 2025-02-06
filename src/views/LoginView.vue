@@ -94,11 +94,14 @@ async function login() {
             cookieCreator(data);
 
             // Lagra användarnamn och ID
-            /* sessionStorage.setItem("username", data.loggedInUser.username);  */ 
+ 
             sessionStorage.setItem("userID", data.loggedInUser.id);
             const userStore = useUserStore();
             userStore.updateUsername(data.loggedInUser.username);
             
+            //Nollställ scroll så mobilvyn inte hamnar fel
+            window.scrollTo(0, 0);
+
             // Skicka användaren till startsidan
             router.push("/")
         }

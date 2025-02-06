@@ -24,6 +24,7 @@
 import { RouterLink, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { cookieCreator } from '../utils/auth';
+import { useUserStore } from "../stores/userStore"
 
 
 /* ------------ Variabler ------------ */
@@ -86,8 +87,12 @@ async function signup() {
             //Skapa cookie
             cookieCreator(data);
             // Lagra användarnamn och ID
-            sessionStorage.setItem("username", data.newUser.username); 
-            sessionStorage.setItem("userID", data.newUser.id);
+            sessionStorage.setItem("userID", data.loggedInUser.id);
+            const userStore = useUserStore();
+            userStore.updateUsername(data.loggedInUser.username);
+
+            //Nollställ scroll så mobilvyn inte hamnar fel
+            window.scrollTo(0, 0);
              
             //Omdirigera till dashboard
             router.push('/');

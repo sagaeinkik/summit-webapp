@@ -26,7 +26,7 @@ Utöver det har jag inte använt några andra dependencies förutom de som insta
 Underliga problem jag inte ännu har kommit på hur man löser:
 
 -   På android-telefoner är pluset för att lägga till rader i tabellen inte centrerat. Det är det i alla webbläsare jag testat på dator och iPhone.
--   I safari på mobilen kan man behöva refresha sidan direkt efter inloggning för att den ska hamna rätt.
+-   På iPhones kan man behöva ladda om sidan direkt efter inloggning för att den ska renderas på korrekt plats och inte klippas av.
 
 ## Användning
 
