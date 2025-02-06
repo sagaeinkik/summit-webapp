@@ -4,7 +4,7 @@
     <table class="w-full">
         <thead class="bg-medium text-light">
             <tr class="cursor-default">
-                <th class="rounded-tl-2xl" @click="sortProducts('product_id')">ProduktID</th>
+                <th id="btl" class="rounded-tl-2xl" @click="sortProducts('product_id')">ProduktID</th>
                 <th @click="sortProducts('product_name')">Produktnamn</th>
                 <th @click="sortProducts('size')">Storlek</th>
                 <th @click="sortProducts('extra')">Extra</th>
@@ -13,7 +13,7 @@
                 <th @click="sortProducts('in_price')">Inpris</th>
                 <th @click="sortProducts('out_price')">Utpris</th>
                 <th @click="sortProducts('amount')">Saldo</th>
-                <th class="rounded-tr-2xl"></th>
+                <th id="btr" class="rounded-tr-2xl"></th>
             </tr>
         </thead>
         <tbody v-if="filteredProducts.length > 0">
@@ -127,4 +127,15 @@ watch([() => props.search, () => props.filter], () => {
 <style lang="scss" scoped>
 @use "../../assets/scss/vars" as v;
 @use "../../assets/scss/tables" as t;
+
+//Specifika regler för firefox pga dum
+@supports (-moz-appearance:none) {
+    thead {
+        background-color: v.$light; 
+
+        th {
+            background-color: v.$medium; 
+        }
+    }
+}
 </style>

@@ -55,8 +55,7 @@ select:focus {
         margin-bottom: 0.2em;
     }
 
-    input,
-    select {
+    input {
         width: 100%;
         margin-bottom: 1em;
         border-radius: 1em;
@@ -109,7 +108,15 @@ select:focus {
     }
 }
 
-//Formulär
+//Select-lista
+select {
+    width: 100%;
+    margin-bottom: 1em;
+    border-radius: 1em;
+    padding: 0.3em 0.8em;
+}
+
+//Formulären som läggs på overlayen
 .form-wrapper {
     width: 70%;
     height: 97%;

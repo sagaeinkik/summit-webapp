@@ -69,7 +69,7 @@ import { RouterView } from 'vue-router'
 
 @media (max-width: 450px) {
     .wrapper img {
-        width: 6em;
+        width: 4em;
     }
 }
 </style>

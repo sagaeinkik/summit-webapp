@@ -1,5 +1,5 @@
 <template>
-    <div class="flex gap-8 items-end">
+    <div class="ctrl-grid-wrap grid gap-8 items-end">
         <AddButton id="add" :isActive="isActive" @buttonClick="handleAddSupplier"/>
         <SearchBar id="searchbar" :placeholder="'Sök leverantör'" @search="handleSearch"/>
         <SelectList id="select" name="product-filter" :options="supplierFilterOptions" @filterChange="handleFilterChange" class="justify-self-end" />

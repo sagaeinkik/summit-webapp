@@ -5,7 +5,7 @@
         </RouterLink>
     <div class="logged-in text-white">
         <!-- Fixa detta. -->
-        <p><span>Inloggad som </span>{{ username }}</p>
+        <p><span>Inloggad som </span>{{ userStore.username }}</p>
     </div>
     <button @click="logout()" class="bg-mediumdark text-white px-8 py-3 rounded-3xl hover:bg-medium">
         Logga ut
@@ -20,8 +20,7 @@ import { onMounted, ref } from "vue";
 
 const router = useRouter();
 const userStore = useUserStore();
-//Hämta användarnamn från userStore
-let username = userStore.username;
+
 
 
 //Radera cookie, rensa storage, skicka till login
@@ -32,10 +31,6 @@ function logout() {
     router.push("/login");
 }
 
-onMounted(() => {
-    //Hämta användarnamn från userStore redan vid inladdning
-    username.value = userStore.username;
-})
 </script>
 
 

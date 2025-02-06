@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Allmänna body-regler */
 body {
     background: linear-gradient(#082329, #0b4651);
     max-width: 2300px;
@@ -14,6 +15,7 @@ body {
     position: relative;
 }
 
+/* Rubriker */
 h1,
 h2,
 h3,
@@ -33,6 +35,7 @@ h3 {
     font-size: 1.17em;
 }
 
+/* Allmänt för knappar */
 button,
 input[type='submit'] {
     color: black;
@@ -44,6 +47,7 @@ input[type='submit'] {
     -moz-transition: 0.6s ease;
 }
 
+/* Länkar */
 a {
     text-decoration: none;
     color: black;

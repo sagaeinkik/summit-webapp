@@ -24,6 +24,7 @@
 import { RouterLink, useRouter } from 'vue-router';
 import { ref } from 'vue';
 import { cookieCreator } from '../utils/auth';
+import { useUserStore } from "../stores/userStore"
 
 /* ------------ Variabler ------------ */
 //Router
@@ -91,9 +92,13 @@ async function login() {
         if (data.message === "Inloggning lyckades") {
             // Skapa cookie
             cookieCreator(data);
+
             // Lagra användarnamn och ID
-            sessionStorage.setItem("username", data.loggedInUser.username);  
+            /* sessionStorage.setItem("username", data.loggedInUser.username);  */ 
             sessionStorage.setItem("userID", data.loggedInUser.id);
+            const userStore = useUserStore();
+            userStore.updateUsername(data.loggedInUser.username);
+            
             // Skicka användaren till startsidan
             router.push("/")
         }

@@ -5,7 +5,7 @@ import { ref, computed } from 'vue';
 const username = ref('');
 
 if (sessionStorage.getItem('username')) {
-    username.value = sessionStorage.getItem('username');
+    username.value = sessionStorage.getItem('username' || '');
 }
 
 export const useUserStore = () => {
@@ -22,5 +22,6 @@ export const useUserStore = () => {
     return {
         username: currentUsername,
         updateUsername,
+        usernameRef: username,
     };
 };

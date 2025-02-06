@@ -1,10 +1,12 @@
 @use './vars' as v;
 
+//Allmän
 table {
     font-family: v.$logs;
     font-size: 0.85em;
 }
 
+//Rubriker
 th {
     text-align: left;
     font-weight: 400;
@@ -17,11 +19,13 @@ th {
     }
 }
 
+//Data
 td {
     border-bottom: 1px solid v.$medium;
     padding: 0.5em 1em;
 }
 
+//Redigera-knapp
 td.edit {
     text-align: center;
 }
@@ -41,6 +45,17 @@ tr:nth-child(even) {
 .table-wrapper {
     overflow: auto;
     height: calc(100vh - 375px);
+}
+
+//Specifika egenskaper för Firefox för den är kinkig
+@supports (-moz-appearance: none) {
+    thead {
+        background-color: v.$light;
+
+        th {
+            background-color: v.$medium;
+        }
+    }
 }
 
 //Minska tabellens kolumner, klipp av med punkter

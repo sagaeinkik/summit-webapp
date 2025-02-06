@@ -21,6 +21,12 @@ Utöver det har jag inte använt några andra dependencies förutom de som insta
 -   Om man hovrar över tabelldata som har klippts av med punkter (...) ser man en tooltip med innehållet.
 -   Det saknas stöd för att bredda/minska tabellens fält.
 -   För produkter anger man även ProduktID, som ska motsvara streckkoder.
+-   Användarnamn och lösenord är skiftlägeskänsliga.
+
+Underliga problem jag inte ännu har kommit på hur man löser:
+
+-   På android-telefoner är pluset för att lägga till rader i tabellen inte centrerat. Det är det i alla webbläsare jag testat på dator och iPhone.
+-   I safari på mobilen kan man behöva refresha sidan direkt efter inloggning för att den ska hamna rätt.
 
 ## Användning
 

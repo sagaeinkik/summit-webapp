@@ -1,7 +1,7 @@
 <template>
     <div class="search-select">
         <label :for="name" class="mr-2">Sök enligt:</label>
-        <select :name="name" :id="name" @change="handleChange" class="py-2 px-3 rounded-3xl">
+        <select :name="name" :id="name" @change="handleChange" class="py-2 px-3 rounded-3xl bg-white">
             <option v-for="option in options" :value="option.value" :key="option.value">{{ option.label }}</option>
         </select>
     </div>

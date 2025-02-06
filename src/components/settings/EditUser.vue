@@ -37,7 +37,7 @@
 
 <script setup>
 /* ------------ Importer ------------- */
-import { onMounted, ref } from 'vue';
+import { onMounted, ref, watch } from 'vue';
 import { getCookie, cookieCreator } from "../../utils/auth";
 import { useUserStore } from "../../stores/userStore";
 
@@ -46,18 +46,18 @@ import { useUserStore } from "../../stores/userStore";
 let apiUrl = "https://summitapi.up.railway.app";
 let userToken = getCookie("jwt"); //Token
 const userID = sessionStorage.getItem("userID"); //AnvändarID (Används i anrop)
-const userName = sessionStorage.getItem("username"); //Användarnamn
+const userStore = useUserStore();
 
 const errors = ref(""); //Eventuella error
 const successMsg = ref(""); //Succémeddelande
 const showForm = ref(true); //Visa formulär
 
 const user = ref({
-    username: userName,
+    username: userStore.usernameRef.value,
     password: ""
 });
 
-const userStore = useUserStore();
+
 
 /* ------ Props, emits, expose ------- */
 
@@ -85,8 +85,10 @@ const handleSubmit = () => {
 
 //Byt ut saker i storage och cookie
 function updateStorage(data) {
+
     //Uppdatera tokenvariabel
     userToken = data.token; 
+
 
     //Ta bort gammal cookie
     document.cookie = "jwt=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;";
@@ -94,12 +96,16 @@ function updateStorage(data) {
     //Sätt ny cookie med ny token
     cookieCreator(data);
 
-    //Byt ut användarnamn i sessionStorage
+    //Uppdatera användarnamnet i store
     userStore.updateUsername(data.updatedUser.username);
 }
 
 
 async function updateUser() {
+    console.log("Token being sent:", userToken);
+    console.log("User data being sent:", user.value);
+    console.log("Current username in store:", userStore.username);
+
     try {
         const response = await fetch(`${apiUrl}/users/id=${userID}`, {
             method: "PUT",
@@ -132,7 +138,7 @@ async function updateUser() {
                 errors.value = "Något gick fel vid uppdatering: " + data.message;
 
         } else if(data.https_response && data.https_response.code === 403 || data.statusCode && data.statusCode === 500) {
-
+            console.error(data.message);
             errors.value = "Användarnamnet är upptaget."; 
         } else {
 
@@ -146,6 +152,11 @@ async function updateUser() {
 
 
 /* -------- Watch, onMounted --------- */
+onMounted(() => {
+    console.log("Username from store:", userStore.username);
+    console.log("Username from sessionStorage:", sessionStorage.getItem('username'));
+    user.value.username = sessionStorage.getItem('username') || userStore.username;
+})
 
 </script>
 
