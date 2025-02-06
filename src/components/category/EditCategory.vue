@@ -15,7 +15,7 @@
         <!-- Namn-->
         <div class="form-input">
             <label for="categoryName">Kategorinamn*:</label>
-            <input v-model="formData.category_name" type="text" name="categoryName" id="categoryName">
+            <input required v-model="formData.category_name" type="text" name="categoryName" id="categoryName">
         </div>
 
         <!-- Knappar -->

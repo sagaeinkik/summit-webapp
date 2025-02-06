@@ -15,13 +15,13 @@
         <!-- Användarnamn -->
         <div class="form-input">
             <label for="username">Användarnamn*:</label>
-            <input v-model="user.username" type="text" name="username" id="username">
+            <input required v-model="user.username" type="text" name="username" id="username">
         </div>
 
         <!-- Lösenord -->
         <div class="form-input">
             <label for="password">Lösenord*:</label>
-            <input v-model="user.password" type="password" name="password" id="password">
+            <input required v-model="user.password" type="password" name="password" id="password">
         </div>
 
 
@@ -102,9 +102,6 @@ function updateStorage(data) {
 
 
 async function updateUser() {
-    console.log("Token being sent:", userToken);
-    console.log("User data being sent:", user.value);
-    console.log("Current username in store:", userStore.username);
 
     try {
         const response = await fetch(`${apiUrl}/users/id=${userID}`, {

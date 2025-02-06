@@ -11,13 +11,13 @@
         <!-- Namn-->
         <div class="form-input">
             <label for="categoryName">Kategorinamn*:</label>
-            <input v-model="categoryToAdd.categoryName" type="text" name="categoryName" id="categoryName">
+            <input required v-model="categoryToAdd.categoryName" type="text" name="categoryName" id="categoryName">
         </div>
 
         <!-- Knappar -->
         <div class="form-controls">
             <input type="submit" value="Lägg till" @click="addCategory">
-            <input type="reset" value="Nollställ">
+            <input required type="reset" value="Nollställ">
         </div>
     </form>
 </div>

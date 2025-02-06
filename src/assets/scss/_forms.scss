@@ -12,6 +12,7 @@
     align-items: center;
 }
 
+//Fokusregler
 input:focus,
 select:focus {
     outline: 1px solid v.$medium;
@@ -132,6 +133,13 @@ select {
     font-size: 3em;
 }
 
+//För undersidor med lägg till-knapp, lista och sökfält
+.ctrl-grid-wrap {
+    grid-template-columns: 1fr 2fr 1fr;
+}
+
+/* MEDIA QUERIES */
+
 //Bredda formulär
 @media (max-width: 900px) {
     .form-wrapper {
@@ -153,17 +161,13 @@ select {
     }
 }
 
-//För undersidor med lägg till-knapp, lista och sökfält
-.ctrl-grid-wrap {
-    grid-template-columns: 1fr 2fr 1fr;
-}
-
 @media (max-width: 800px) {
     .ctrl-grid-wrap {
         gap: 1em;
     }
 }
 
+//Möblera om controllerna på undersidorna
 @media (max-width: 600px) {
     .ctrl-grid-wrap {
         grid-template-areas: 'add select select' 'searchbar searchbar searchbar';

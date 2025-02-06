@@ -13,13 +13,13 @@
             <!-- ID -->
             <div class="form-input">
                 <label for="productId">ProduktID*:</label>
-                <input v-model="productToAdd.productId" type="text" name="productId" id="productId">
+                <input required v-model="productToAdd.productId" type="text" name="productId" id="productId">
             </div>
 
             <!-- Produktnamn -->
             <div class="form-input">
                 <label for="productName">Produktnamn*:</label>
-                <input v-model="productToAdd.productName" type="text" name="productName" id="productName">
+                <input required v-model="productToAdd.productName" type="text" name="productName" id="productName">
             </div>
         </div>
 
@@ -40,7 +40,7 @@
         <!-- Antal -->
         <div class="form-input">
             <label for="amount">Lagersaldo*:</label>
-            <input v-model="productToAdd.amount" type="number" name="amount" id="amount">
+            <input required v-model="productToAdd.amount" type="number" name="amount" id="amount">
         </div>
 
         <!-- Grupp -->
@@ -48,12 +48,12 @@
             <!-- Inpris -->
             <div class="form-input">
                 <label for="inPrice">Inpris*:</label>
-                <input v-model="productToAdd.inPrice" type="number" name="inPrice" id="inPrice">
+                <input required v-model="productToAdd.inPrice" type="number" name="inPrice" id="inPrice">
             </div>
             <!-- Utpris -->
             <div class="form-input">
                 <label for="outPrice">Utpris*:</label>
-                <input v-model="productToAdd.outPrice" type="number" name="outPrice" id="outPrice">
+                <input required v-model="productToAdd.outPrice" type="number" name="outPrice" id="outPrice">
             </div>
         </div>
 
@@ -62,7 +62,7 @@
             <!-- Leverantör -->
             <div class="form-input">
                 <label for="supplierId">Leverantör*:</label>
-                <select v-model="productToAdd.supplierId" name="supplierId" id="supplierId">
+                <select required v-model="productToAdd.supplierId" name="supplierId" id="supplierId">
                     <option value="" disabled selected>Välj i listan</option>
                     <option v-for="supplier in suppliers" :key="supplier.id" :value="supplier.id">{{ supplier.company_name}}</option>
                 </select>
@@ -70,7 +70,7 @@
             <!-- Kategori -->
             <div class="form-input">
                 <label for="categoryId">Kategori*:</label>
-                <select v-model="productToAdd.categoryId" name="categoryId" id="categoryId">
+                <select required v-model="productToAdd.categoryId" name="categoryId" id="categoryId">
                     <option value="" disabled selected>Välj i listan</option>
                     <option v-for="category in categories" :key="category.id" :value="category.id">{{ category.category_name}}</option>
                 </select>

@@ -13,7 +13,7 @@
             <!-- Namn-->
             <div class="form-input">
                 <label for="companyName">Företagsnamn*:</label>
-                <input v-model="supplierToAdd.companyName" type="text" name="companyName" id="companyName">
+                <input required v-model="supplierToAdd.companyName" type="text" name="companyName" id="companyName">
             </div>
 
             <!-- Grupp -->
@@ -35,12 +35,12 @@
                 <!-- Telefon -->
                 <div class="form-input">
                     <label for="telephone">Telefon*:</label>
-                    <input v-model="supplierToAdd.telephone" type="text" name="telephone" id="telephone">
+                    <input required v-model="supplierToAdd.telephone" type="text" name="telephone" id="telephone">
                 </div>
                 <!-- Epost -->
                 <div class="form-input">
                     <label for="email">Email*:</label>
-                    <input v-model="supplierToAdd.email" type="email" name="email" id="email">
+                    <input required v-model="supplierToAdd.email" type="email" name="email" id="email">
                 </div>
             </div>
 
