@@ -150,8 +150,6 @@ async function updateUser() {
 
 /* -------- Watch, onMounted --------- */
 onMounted(() => {
-    console.log("Username from store:", userStore.username);
-    console.log("Username from sessionStorage:", sessionStorage.getItem('username'));
     user.value.username = sessionStorage.getItem('username') || userStore.username;
 })
 
